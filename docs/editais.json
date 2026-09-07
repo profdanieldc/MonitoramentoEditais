@@ -1,34 +1,14 @@
 {
-  "gerado_em": "2026-09-07T20:48:25+00:00",
+  "gerado_em": "2026-09-07T23:13:21+00:00",
   "fontes": {
     "sted-ufma": {
       "nome": "STED/UFMA",
-      "ultima_rodada": "2026-09-07T20:48:25+00:00",
-      "itens_ultima_rodada": 6,
+      "ultima_rodada": "2026-09-07T23:13:21+00:00",
+      "itens_ultima_rodada": 0,
       "ultimo_resultado": "2026-09-07"
     }
   },
   "editais": [
-    {
-      "id": "40036b21f6136c18",
-      "url": "https://portalpadrao.ufma.br/dted/editais/edital-no10-2026-mediador-pedagogico-residente",
-      "titulo": "Edital Nº10/2026 | Processo Seletivo para Mediador Pedagógico Residente dos cursos de Graduação EaD",
-      "fonte": "sted-ufma",
-      "fonte_nome": "STED/UFMA",
-      "descricao": "EDITAL Nº10/2026 - STED",
-      "publicado_em": null,
-      "modificado_em": "2026-09-05",
-      "prazo": "2026-09-10",
-      "prazo_confianca": "extraido",
-      "pontuacao": 7,
-      "motivos": [
-        "processo seletivo",
-        "fecha em 3 dia(s)"
-      ],
-      "visto_em": "2026-09-07T20:48:25+00:00",
-      "atualizado_em": "2026-09-07T20:48:25+00:00",
-      "revisao": 2
-    },
     {
       "id": "d631ba1e6863b503",
       "url": "https://portalpadrao.ufma.br/dted/editais/edital-ndeg04-2025-professor-formador",
@@ -69,6 +49,26 @@
       "visto_em": "2026-09-07T20:48:25+00:00",
       "atualizado_em": "2026-09-07T20:48:25+00:00",
       "revisao": 1
+    },
+    {
+      "id": "40036b21f6136c18",
+      "url": "https://portalpadrao.ufma.br/dted/editais/edital-no10-2026-mediador-pedagogico-residente",
+      "titulo": "Edital Nº10/2026 | Processo Seletivo para Mediador Pedagógico Residente dos cursos de Graduação EaD",
+      "fonte": "sted-ufma",
+      "fonte_nome": "STED/UFMA",
+      "descricao": "EDITAL Nº10/2026 - STED",
+      "publicado_em": null,
+      "modificado_em": "2026-09-05",
+      "prazo": "2026-09-10",
+      "prazo_confianca": "extraido",
+      "pontuacao": 7,
+      "motivos": [
+        "processo seletivo",
+        "fecha em 3 dia(s)"
+      ],
+      "visto_em": "2026-09-07T20:48:25+00:00",
+      "atualizado_em": "2026-09-07T20:48:25+00:00",
+      "revisao": 2
     },
     {
       "id": "f5b16312c3548c08",
