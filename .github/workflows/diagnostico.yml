@@ -1,8 +1,14 @@
 name: Diagnóstico de rede
 
-# Segunda rodada. O curl alcança o portal da UFMA sem problema, então o
-# que trava é alguma diferença na requisição do Python. Este workflow
-# compara variações de cabeçalho para isolar a causa.
+# Terceira rodada, desta vez decisiva.
+#
+# O coletor falha com timeout enquanto testes isolados passam. As duas
+# explicações possíveis são: (a) algo no cliente Python, ou (b) o IP de
+# saída do runner sendo descartado pela UFMA.
+#
+# Este workflow alterna curl e Python DENTRO DO MESMO JOB, no mesmo IP,
+# várias vezes seguidas. Se um passa e o outro falha lado a lado, é o
+# cliente. Se os dois falham e passam juntos, é o IP ou o servidor.
 
 on:
   workflow_dispatch:
@@ -11,48 +17,54 @@ jobs:
   diagnosticar:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4        # igual ao workflow de coleta
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - run: pip install requests
+      - run: pip install -r requirements.txt
 
-      - name: Comparar cabeçalhos
+      - name: IP de saída deste runner
+        run: curl -s --max-time 15 https://ipinfo.io/ip || echo "(falhou)"
+
+      - name: Alternar curl e Python, seis vezes
         run: |
           python - <<'PY'
-          import requests, time
+          import subprocess, sys, time
+          sys.path.insert(0, ".")
+          from coletores.base import buscar, CABECALHO
+          import requests
 
           URL = "https://portalpadrao.ufma.br/dted/colecoes/todos-os-editais"
 
-          NAVEGADOR = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-                       "AppleWebKit/537.36 (KHTML, like Gecko) "
-                       "Chrome/128.0.0.0 Safari/537.36")
+          def tentar_curl():
+              inicio = time.time()
+              r = subprocess.run(
+                  ["curl", "-sS", "-o", "/dev/null", "--max-time", "20",
+                   "-w", "%{http_code}", URL],
+                  capture_output=True, text=True)
+              return f"http={r.stdout.strip() or '---'} ({time.time()-inicio:.1f}s)"
 
-          casos = [
-              ("user-agent do coletor",
-               {"User-Agent": "monitor-editais/0.1 (projeto pessoal de "
-                              "acompanhamento de editais; contato via GitHub)"}),
-              ("user-agent de navegador", {"User-Agent": NAVEGADOR}),
-              ("user-agent do curl", {"User-Agent": "curl/8.5.0"}),
-              ("padrao do requests", None),
-              ("navegador + accept completo", {
-                  "User-Agent": NAVEGADOR,
-                  "Accept": "text/html,application/xhtml+xml,application/xml;"
-                            "q=0.9,*/*;q=0.8",
-                  "Accept-Language": "pt-BR,pt;q=0.9",
-              }),
-          ]
-
-          for nome, cabecalho in casos:
+          def tentar_requests():
               inicio = time.time()
               try:
-                  r = requests.get(URL, headers=cabecalho, timeout=25)
-                  linhas = r.text.count("<tr")
-                  print(f"{nome:32} http={r.status_code} "
-                        f"{time.time()-inicio:.1f}s  bytes={len(r.content)} "
-                        f"linhas_tabela={linhas}")
-              except Exception as erro:
-                  print(f"{nome:32} FALHOU em {time.time()-inicio:.1f}s "
-                        f"-> {type(erro).__name__}")
-              time.sleep(3)
+                  r = requests.get(URL, headers=CABECALHO, timeout=20)
+                  return f"http={r.status_code} ({time.time()-inicio:.1f}s)"
+              except Exception as e:
+                  return f"{type(e).__name__} ({time.time()-inicio:.1f}s)"
+
+          def tentar_coletor():
+              """Exatamente a função que o coletor usa, com 1 tentativa."""
+              inicio = time.time()
+              sopa = buscar(URL, tentativas=1)
+              achou = "ok" if sopa and sopa.find("table") else "vazio/None"
+              return f"{achou} ({time.time()-inicio:.1f}s)"
+
+          for volta in range(1, 7):
+              print(f"volta {volta}")
+              print(f"   curl              {tentar_curl()}")
+              print(f"   requests direto   {tentar_requests()}")
+              print(f"   buscar() do repo  {tentar_coletor()}")
+              time.sleep(12)
           PY
