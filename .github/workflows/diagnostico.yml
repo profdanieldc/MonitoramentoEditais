@@ -1,7 +1,8 @@
 name: Diagnóstico de rede
 
-# Temporário. Serve para descobrir por que o runner do GitHub não alcança
-# o portal da UFMA. Pode ser apagado depois que a causa for identificada.
+# Segunda rodada. O curl alcança o portal da UFMA sem problema, então o
+# que trava é alguma diferença na requisição do Python. Este workflow
+# compara variações de cabeçalho para isolar a causa.
 
 on:
   workflow_dispatch:
@@ -10,52 +11,48 @@ jobs:
   diagnosticar:
     runs-on: ubuntu-latest
     steps:
-      - name: De onde este runner está saindo
-        run: |
-          echo "== IP público e país de saída"
-          curl -s --max-time 20 https://ipinfo.io/json || echo "(falhou)"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
 
-      - name: DNS do portal da UFMA
-        run: |
-          sudo apt-get install -y dnsutils >/dev/null 2>&1 || true
-          echo "== registros A"
-          dig +short A portalpadrao.ufma.br || true
-          echo "== registros AAAA (IPv6)"
-          dig +short AAAA portalpadrao.ufma.br || true
+      - run: pip install requests
 
-      - name: UFMA, forçando IPv4
-        continue-on-error: true
+      - name: Comparar cabeçalhos
         run: |
-          curl -4 -sS -o /dev/null --max-time 25 \
-            -w "http=%{http_code} conexao=%{time_connect}s total=%{time_total}s\n" \
-            https://portalpadrao.ufma.br/dted/colecoes/todos-os-editais
+          python - <<'PY'
+          import requests, time
 
-      - name: UFMA, deixando o sistema escolher
-        continue-on-error: true
-        run: |
-          curl -sS -o /dev/null --max-time 25 \
-            -w "http=%{http_code} conexao=%{time_connect}s total=%{time_total}s\n" \
-            https://portalpadrao.ufma.br/dted/colecoes/todos-os-editais
+          URL = "https://portalpadrao.ufma.br/dted/colecoes/todos-os-editais"
 
-      # Se estes três responderem e a UFMA não, o bloqueio é específico dela.
-      # Se nenhum responder, o problema alcança o Brasil todo a partir daqui.
-      - name: Outros sites brasileiros, para comparação
-        continue-on-error: true
-        run: |
-          for alvo in \
-            "https://www.fapema.br/" \
-            "https://secti.ma.gov.br/" \
-            "https://www.ufma.br/" \
-            "https://www.gov.br/"
-          do
-            printf "%-38s " "$alvo"
-            curl -4 -sS -o /dev/null --max-time 20 \
-              -w "http=%{http_code} conexao=%{time_connect}s\n" "$alvo" \
-              || echo "sem resposta"
-          done
+          NAVEGADOR = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                       "AppleWebKit/537.36 (KHTML, like Gecko) "
+                       "Chrome/128.0.0.0 Safari/537.36")
 
-      - name: Até onde a rota chega
-        continue-on-error: true
-        run: |
-          sudo apt-get install -y traceroute >/dev/null 2>&1 || true
-          traceroute -T -p 443 -w 2 -q 1 -m 20 portalpadrao.ufma.br || true
+          casos = [
+              ("user-agent do coletor",
+               {"User-Agent": "monitor-editais/0.1 (projeto pessoal de "
+                              "acompanhamento de editais; contato via GitHub)"}),
+              ("user-agent de navegador", {"User-Agent": NAVEGADOR}),
+              ("user-agent do curl", {"User-Agent": "curl/8.5.0"}),
+              ("padrao do requests", None),
+              ("navegador + accept completo", {
+                  "User-Agent": NAVEGADOR,
+                  "Accept": "text/html,application/xhtml+xml,application/xml;"
+                            "q=0.9,*/*;q=0.8",
+                  "Accept-Language": "pt-BR,pt;q=0.9",
+              }),
+          ]
+
+          for nome, cabecalho in casos:
+              inicio = time.time()
+              try:
+                  r = requests.get(URL, headers=cabecalho, timeout=25)
+                  linhas = r.text.count("<tr")
+                  print(f"{nome:32} http={r.status_code} "
+                        f"{time.time()-inicio:.1f}s  bytes={len(r.content)} "
+                        f"linhas_tabela={linhas}")
+              except Exception as erro:
+                  print(f"{nome:32} FALHOU em {time.time()-inicio:.1f}s "
+                        f"-> {type(erro).__name__}")
+              time.sleep(3)
+          PY
