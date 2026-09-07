@@ -1,0 +1,61 @@
+name: Diagnóstico de rede
+
+# Temporário. Serve para descobrir por que o runner do GitHub não alcança
+# o portal da UFMA. Pode ser apagado depois que a causa for identificada.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  diagnosticar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: De onde este runner está saindo
+        run: |
+          echo "== IP público e país de saída"
+          curl -s --max-time 20 https://ipinfo.io/json || echo "(falhou)"
+
+      - name: DNS do portal da UFMA
+        run: |
+          sudo apt-get install -y dnsutils >/dev/null 2>&1 || true
+          echo "== registros A"
+          dig +short A portalpadrao.ufma.br || true
+          echo "== registros AAAA (IPv6)"
+          dig +short AAAA portalpadrao.ufma.br || true
+
+      - name: UFMA, forçando IPv4
+        continue-on-error: true
+        run: |
+          curl -4 -sS -o /dev/null --max-time 25 \
+            -w "http=%{http_code} conexao=%{time_connect}s total=%{time_total}s\n" \
+            https://portalpadrao.ufma.br/dted/colecoes/todos-os-editais
+
+      - name: UFMA, deixando o sistema escolher
+        continue-on-error: true
+        run: |
+          curl -sS -o /dev/null --max-time 25 \
+            -w "http=%{http_code} conexao=%{time_connect}s total=%{time_total}s\n" \
+            https://portalpadrao.ufma.br/dted/colecoes/todos-os-editais
+
+      # Se estes três responderem e a UFMA não, o bloqueio é específico dela.
+      # Se nenhum responder, o problema alcança o Brasil todo a partir daqui.
+      - name: Outros sites brasileiros, para comparação
+        continue-on-error: true
+        run: |
+          for alvo in \
+            "https://www.fapema.br/" \
+            "https://secti.ma.gov.br/" \
+            "https://www.ufma.br/" \
+            "https://www.gov.br/"
+          do
+            printf "%-38s " "$alvo"
+            curl -4 -sS -o /dev/null --max-time 20 \
+              -w "http=%{http_code} conexao=%{time_connect}s\n" "$alvo" \
+              || echo "sem resposta"
+          done
+
+      - name: Até onde a rota chega
+        continue-on-error: true
+        run: |
+          sudo apt-get install -y traceroute >/dev/null 2>&1 || true
+          traceroute -T -p 443 -w 2 -q 1 -m 20 portalpadrao.ufma.br || true
