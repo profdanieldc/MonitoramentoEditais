@@ -1,0 +1,132 @@
+{
+  "gerado_em": "2026-09-07T20:48:25+00:00",
+  "fontes": {
+    "sted-ufma": {
+      "nome": "STED/UFMA",
+      "ultima_rodada": "2026-09-07T20:48:25+00:00",
+      "itens_ultima_rodada": 6,
+      "ultimo_resultado": "2026-09-07"
+    }
+  },
+  "editais": [
+    {
+      "id": "40036b21f6136c18",
+      "url": "https://portalpadrao.ufma.br/dted/editais/edital-no10-2026-mediador-pedagogico-residente",
+      "titulo": "Edital Nº10/2026 | Processo Seletivo para Mediador Pedagógico Residente dos cursos de Graduação EaD",
+      "fonte": "sted-ufma",
+      "fonte_nome": "STED/UFMA",
+      "descricao": "EDITAL Nº10/2026 - STED",
+      "publicado_em": null,
+      "modificado_em": "2026-09-05",
+      "prazo": "2026-09-10",
+      "prazo_confianca": "extraido",
+      "pontuacao": 7,
+      "motivos": [
+        "processo seletivo",
+        "fecha em 3 dia(s)"
+      ],
+      "visto_em": "2026-09-07T20:48:25+00:00",
+      "atualizado_em": "2026-09-07T20:48:25+00:00",
+      "revisao": 2
+    },
+    {
+      "id": "d631ba1e6863b503",
+      "url": "https://portalpadrao.ufma.br/dted/editais/edital-ndeg04-2025-professor-formador",
+      "titulo": "Edital N°04/2025 | Processo Seletivo para a formação de cadastro de reserva de Professor Formador interno e externo para atuar nos Cursos de Graduação EAD",
+      "fonte": "sted-ufma",
+      "fonte_nome": "STED/UFMA",
+      "descricao": "EDITAL N°04/2025 - STED",
+      "publicado_em": null,
+      "modificado_em": "2026-09-06",
+      "prazo": "2026-09-19",
+      "prazo_confianca": "extraido",
+      "pontuacao": 19,
+      "motivos": [
+        "professor formador",
+        "cadastro de reserva",
+        "processo seletivo"
+      ],
+      "visto_em": "2026-09-07T20:48:25+00:00",
+      "atualizado_em": "2026-09-07T20:48:25+00:00",
+      "revisao": 1
+    },
+    {
+      "id": "8a28a9c09b559224",
+      "url": "https://portalpadrao.ufma.br/dted/editais/edital-no13-2026-coordenador-especializacao",
+      "titulo": "Edital Nº13/2026 | Processo seletivo para coordenador dos cursos de especialização em análise de dados e inteligência artificial",
+      "fonte": "sted-ufma",
+      "fonte_nome": "STED/UFMA",
+      "descricao": "Edital nº 13/2026 - STED",
+      "publicado_em": null,
+      "modificado_em": "2026-09-06",
+      "prazo": "2026-10-03",
+      "prazo_confianca": "extraido",
+      "pontuacao": 11,
+      "motivos": [
+        "processo seletivo",
+        "inteligência artificial"
+      ],
+      "visto_em": "2026-09-07T20:48:25+00:00",
+      "atualizado_em": "2026-09-07T20:48:25+00:00",
+      "revisao": 1
+    },
+    {
+      "id": "f5b16312c3548c08",
+      "url": "https://portalpadrao.ufma.br/dted/editais/edital-no11-2026-assistente-pedagogico",
+      "titulo": "Edital Nº11/2026 | Processo Seletivo para Assistente Pedagógico dos Cursos na modalidade educação a distância",
+      "fonte": "sted-ufma",
+      "fonte_nome": "STED/UFMA",
+      "descricao": "EDITAL Nº11/2026 - STED",
+      "publicado_em": null,
+      "modificado_em": "2026-09-06",
+      "prazo": null,
+      "prazo_confianca": "ausente",
+      "pontuacao": 4,
+      "motivos": [
+        "processo seletivo"
+      ],
+      "visto_em": "2026-09-07T20:48:25+00:00",
+      "atualizado_em": "2026-09-07T20:48:25+00:00",
+      "revisao": 1
+    },
+    {
+      "id": "c4e9034bf1437009",
+      "url": "https://portalpadrao.ufma.br/dted/editais/edital-no17-2026-prorrogacao-validade",
+      "titulo": "Edital Nº17/2026 | Prorrogação da validade do resultado do processo seletivo regido pelo Edital nº 36/2023: Especialização em Gestão Estratégica de Pessoas na Era Digital",
+      "fonte": "sted-ufma",
+      "fonte_nome": "STED/UFMA",
+      "descricao": "",
+      "publicado_em": null,
+      "modificado_em": "2026-09-06",
+      "prazo": null,
+      "prazo_confianca": "ausente",
+      "pontuacao": -16,
+      "motivos": [
+        "processo seletivo",
+        "−prorrogação da validade do resultado"
+      ],
+      "visto_em": "2026-09-07T20:48:25+00:00",
+      "atualizado_em": "2026-09-07T20:48:25+00:00",
+      "revisao": 1
+    },
+    {
+      "id": "73f442ce857a451e",
+      "url": "https://portalpadrao.ufma.br/dted/editais/edital-ndeg-22-2025-mediador-pedagogico",
+      "titulo": "Edital N° 22/2025 - Processo Seletivo para Mediador Pedagógico dos Cursos de Graduação EaD - UAB/CAPES/UFMA",
+      "fonte": "sted-ufma",
+      "fonte_nome": "STED/UFMA",
+      "descricao": "",
+      "publicado_em": null,
+      "modificado_em": "2026-09-06",
+      "prazo": "2026-08-29",
+      "prazo_confianca": "extraido",
+      "pontuacao": 4,
+      "motivos": [
+        "processo seletivo"
+      ],
+      "visto_em": "2026-09-07T20:48:25+00:00",
+      "atualizado_em": "2026-09-07T20:48:25+00:00",
+      "revisao": 1
+    }
+  ]
+}

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Editais</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --papel: #F3F5F2;
+    --superficie: #FFFFFF;
+    --tinta: #16211B;
+    --tinta-media: #4A5850;
+    --tinta-fraca: #79857D;
+    --linha: #DBE0DA;
+    --critico: #96271F;
+    --atencao: #8A6212;
+    --calmo: #2F6A4F;
+    --neutro: #8D978F;
+    --foco: #2F6A4F;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--papel);
+    color: var(--tinta);
+    font-family: Inter, system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .folha { max-width: 880px; margin: 0 auto; padding: 40px 20px 96px; }
+
+  /* ---------- cabeçalho ---------- */
+  .topo { margin-bottom: 28px; }
+
+  .topo h1 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 600;
+    font-size: 34px;
+    letter-spacing: -0.01em;
+    margin: 0 0 6px;
+  }
+
+  .resumo { color: var(--tinta-media); margin: 0; }
+  .resumo strong { font-weight: 600; color: var(--tinta); }
+
+  .rodada { color: var(--tinta-fraca); font-size: 13px; margin: 4px 0 0; }
+
+  .aviso-fonte {
+    margin-top: 16px; padding: 10px 14px;
+    border-left: 3px solid var(--atencao);
+    background: #FBF6E9; color: #6B4E0C; font-size: 14px;
+  }
+
+  /* ---------- controles ---------- */
+  .controles {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    align-items: center; margin-bottom: 22px;
+  }
+
+  #busca {
+    flex: 1 1 240px; min-width: 0;
+    padding: 9px 12px;
+    border: 1px solid var(--linha); border-radius: 3px;
+    background: var(--superficie); color: var(--tinta);
+    font: inherit;
+  }
+  #busca::placeholder { color: var(--tinta-fraca); }
+
+  .abas { display: flex; flex-wrap: wrap; gap: 4px; }
+
+  .aba {
+    padding: 8px 13px; border: 1px solid transparent; border-radius: 3px;
+    background: none; color: var(--tinta-media);
+    font: inherit; cursor: pointer;
+  }
+  .aba:hover { background: #E7EBE6; }
+  .aba[aria-selected="true"] {
+    background: var(--superficie);
+    border-color: var(--linha);
+    color: var(--tinta); font-weight: 500;
+  }
+  .aba .conta { color: var(--tinta-fraca); font-variant-numeric: tabular-nums; }
+  .aba[aria-selected="true"] .conta { color: var(--tinta-media); }
+
+  :focus-visible { outline: 2px solid var(--foco); outline-offset: 2px; }
+
+  /* ---------- lista ---------- */
+  .lista { display: flex; flex-direction: column; gap: 8px; }
+
+  .edital {
+    display: grid;
+    grid-template-columns: 74px 1fr auto;
+    gap: 16px;
+    align-items: start;
+    background: var(--superficie);
+    border: 1px solid var(--linha);
+    border-left-width: 3px;
+    border-left-color: var(--neutro);
+    border-radius: 3px;
+    padding: 14px 16px;
+  }
+  .edital.saindo {
+    opacity: 0; transform: translateX(-8px);
+    transition: opacity .18s ease, transform .18s ease;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .edital.saindo { transition: none; }
+  }
+
+  .edital[data-urgencia="critico"] { border-left-color: var(--critico); }
+  .edital[data-urgencia="atencao"] { border-left-color: var(--atencao); }
+  .edital[data-urgencia="calmo"]   { border-left-color: var(--calmo); }
+  .edital[data-urgencia="encerrado"] { opacity: .55; }
+
+  /* contagem: o elemento memorável da página */
+  .prazo { text-align: center; padding-top: 2px; }
+  .prazo .dias {
+    display: block;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 30px; font-weight: 600; line-height: 1;
+    font-variant-numeric: tabular-nums;
+    color: var(--neutro);
+  }
+  .prazo .unidade {
+    display: block; font-size: 12px; color: var(--tinta-fraca); margin-top: 3px;
+  }
+  .edital[data-urgencia="critico"] .prazo .dias { color: var(--critico); }
+  .edital[data-urgencia="atencao"] .prazo .dias { color: var(--atencao); }
+  .edital[data-urgencia="calmo"]   .prazo .dias { color: var(--calmo); }
+
+  .titulo {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 17px; font-weight: 600; line-height: 1.35;
+    margin: 0 0 5px;
+  }
+  .titulo a { color: var(--tinta); text-decoration: none; }
+  .titulo a:hover { text-decoration: underline; text-underline-offset: 2px; }
+
+  .meta { margin: 0; font-size: 13px; color: var(--tinta-fraca); }
+  .meta .fonte { color: var(--tinta-media); font-weight: 500; }
+  .meta .sep { display: inline-block; width: 1px; height: 10px;
+               background: var(--linha); margin: 0 8px; vertical-align: -1px; }
+
+  .selo {
+    display: inline-block; margin-top: 7px; padding: 2px 7px;
+    border: 1px solid var(--atencao); border-radius: 3px;
+    color: #6B4E0C; font-size: 12px;
+  }
+
+  .acoes { display: flex; flex-direction: column; gap: 5px; }
+  .acoes button {
+    padding: 5px 11px; border: 1px solid var(--linha); border-radius: 3px;
+    background: var(--superficie); color: var(--tinta-media);
+    font: inherit; font-size: 13px; cursor: pointer; white-space: nowrap;
+  }
+  .acoes button:hover { border-color: var(--tinta-fraca); color: var(--tinta); }
+  .acoes button[aria-pressed="true"] {
+    border-color: var(--calmo); color: var(--calmo); font-weight: 500;
+  }
+
+  .vazio {
+    padding: 44px 8px; color: var(--tinta-media);
+    font-family: 'Source Serif 4', Georgia, serif; font-size: 17px;
+  }
+
+  @media (max-width: 620px) {
+    .edital { grid-template-columns: 58px 1fr; }
+    .prazo .dias { font-size: 24px; }
+    .acoes { grid-column: 1 / -1; flex-direction: row; }
+  }
+</style>
+</head>
+<body>
+<main class="folha">
+  <header class="topo">
+    <h1>Editais</h1>
+    <p class="resumo" id="resumo">Carregando o acervo.</p>
+    <p class="rodada" id="rodada"></p>
+    <div id="avisos"></div>
+  </header>
+
+  <div class="controles">
+    <input id="busca" type="search" placeholder="Buscar por título ou fonte"
+           aria-label="Buscar editais">
+    <div class="abas" role="tablist" id="abas"></div>
+  </div>
+
+  <div class="lista" id="lista"></div>
+</main>
+
+<script>
+const CHAVE_ARQUIVADOS = 'editais:arquivados';
+const CHAVE_SALVOS = 'editais:salvos';
+
+let acervo = [];
+let fontes = {};
+let filtro = 'abertos';
+let termo = '';
+
+/* --------- estado local (por navegador) --------- */
+function ler(chave, padrao) {
+  try { return JSON.parse(localStorage.getItem(chave)) ?? padrao; }
+  catch { return padrao; }
+}
+function gravar(chave, valor) {
+  try { localStorage.setItem(chave, JSON.stringify(valor)); } catch {}
+}
+
+/* Arquivados guardam a revisão em que foram arquivados. Se o edital for
+   retificado depois, a revisão sobe e ele reaparece — arquivar não pode
+   virar um jeito de perder justamente a mudança que importava. */
+let arquivados = ler(CHAVE_ARQUIVADOS, {});
+let salvos = ler(CHAVE_SALVOS, []);
+
+const estaArquivado = e =>
+  e.id in arquivados && arquivados[e.id] >= e.revisao;
+const ressuscitou = e =>
+  e.id in arquivados && arquivados[e.id] < e.revisao;
+const estaSalvo = e => salvos.includes(e.id);
+
+/* --------- prazos --------- */
+function diasRestantes(edital) {
+  if (!edital.prazo) return null;
+  const hoje = new Date(); hoje.setHours(0, 0, 0, 0);
+  const fim = new Date(edital.prazo + 'T00:00:00');
+  return Math.round((fim - hoje) / 86400000);
+}
+
+function urgencia(dias) {
+  if (dias === null) return 'sem-prazo';
+  if (dias < 0) return 'encerrado';
+  if (dias <= 5) return 'critico';
+  if (dias <= 15) return 'atencao';
+  return 'calmo';
+}
+
+function textoPrazo(dias) {
+  if (dias === null) return ['—', 'sem prazo'];
+  if (dias < 0) return ['—', 'encerrado'];
+  if (dias === 0) return ['hoje', 'último dia'];
+  return [String(dias), dias === 1 ? 'dia' : 'dias'];
+}
+
+function dataCurta(iso) {
+  if (!iso) return null;
+  const d = new Date(iso);
+  if (isNaN(d)) return null;
+  return d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
+}
+
+/* --------- seleção --------- */
+function visiveis() {
+  let base = acervo;
+  if (filtro === 'abertos') {
+    base = base.filter(e => !estaArquivado(e) && urgencia(diasRestantes(e)) !== 'encerrado');
+  } else if (filtro === 'salvos') {
+    base = base.filter(estaSalvo);
+  } else if (filtro === 'arquivados') {
+    base = base.filter(estaArquivado);
+  }
+  if (termo) {
+    const t = termo.toLowerCase();
+    base = base.filter(e =>
+      (e.titulo + ' ' + e.fonte_nome + ' ' + (e.descricao || '')).toLowerCase().includes(t));
+  }
+  return base;
+}
+
+function contar(nome) {
+  const guarda = filtro; filtro = nome;
+  const total = visiveis().length;
+  filtro = guarda;
+  return total;
+}
+
+/* --------- desenho --------- */
+function desenharAbas() {
+  const abas = [
+    ['abertos', 'Abertos'],
+    ['salvos', 'Salvos'],
+    ['arquivados', 'Arquivados'],
+    ['todos', 'Todos'],
+  ];
+  const caixa = document.getElementById('abas');
+  caixa.innerHTML = '';
+  for (const [nome, rotulo] of abas) {
+    const b = document.createElement('button');
+    b.className = 'aba';
+    b.setAttribute('role', 'tab');
+    b.setAttribute('aria-selected', String(filtro === nome));
+    b.innerHTML = `${rotulo} <span class="conta">${contar(nome)}</span>`;
+    b.onclick = () => { filtro = nome; desenhar(); };
+    caixa.appendChild(b);
+  }
+}
+
+function cartao(edital) {
+  const dias = diasRestantes(edital);
+  const nivel = urgencia(dias);
+  const [numero, unidade] = textoPrazo(dias);
+
+  const artigo = document.createElement('article');
+  artigo.className = 'edital';
+  artigo.dataset.urgencia = nivel;
+
+  const meta = [`<span class="fonte">${escapar(edital.fonte_nome)}</span>`];
+  const quando = dataCurta(edital.modificado_em) || dataCurta(edital.visto_em);
+  if (quando) meta.push(`atualizado em ${quando}`);
+  if (edital.revisao > 1) meta.push(`revisão ${edital.revisao}`);
+  if (edital.prazo_confianca === 'ausente' && !edital.prazo) {
+    meta.push('prazo não identificado');
+  }
+
+  artigo.innerHTML = `
+    <div class="prazo">
+      <span class="dias">${numero}</span>
+      <span class="unidade">${unidade}</span>
+    </div>
+    <div class="corpo">
+      <h2 class="titulo"><a href="${escapar(edital.url)}" target="_blank"
+        rel="noopener">${escapar(edital.titulo)}</a></h2>
+      <p class="meta">${meta.join('<span class="sep"></span>')}</p>
+      ${ressuscitou(edital)
+        ? '<span class="selo">Mudou depois que você arquivou</span>' : ''}
+    </div>
+    <div class="acoes"></div>`;
+
+  const acoes = artigo.querySelector('.acoes');
+
+  const salvar = document.createElement('button');
+  salvar.textContent = estaSalvo(edital) ? 'Salvo' : 'Salvar';
+  salvar.setAttribute('aria-pressed', String(estaSalvo(edital)));
+  salvar.onclick = () => {
+    salvos = estaSalvo(edital)
+      ? salvos.filter(id => id !== edital.id)
+      : [...salvos, edital.id];
+    gravar(CHAVE_SALVOS, salvos);
+    desenhar();
+  };
+
+  const arquivar = document.createElement('button');
+  arquivar.textContent = estaArquivado(edital) ? 'Desarquivar' : 'Arquivar';
+  arquivar.onclick = () => {
+    if (estaArquivado(edital)) {
+      delete arquivados[edital.id];
+      gravar(CHAVE_ARQUIVADOS, arquivados);
+      desenhar();
+      return;
+    }
+    arquivados[edital.id] = edital.revisao;
+    gravar(CHAVE_ARQUIVADOS, arquivados);
+    artigo.classList.add('saindo');
+    const fim = () => desenhar();
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) fim();
+    else setTimeout(fim, 180);
+  };
+
+  acoes.append(salvar, arquivar);
+  return artigo;
+}
+
+function escapar(t) {
+  const d = document.createElement('div');
+  d.textContent = t ?? '';
+  return d.innerHTML;
+}
+
+function desenharResumo() {
+  const abertos = acervo.filter(e =>
+    !estaArquivado(e) && urgencia(diasRestantes(e)) !== 'encerrado');
+  const semana = abertos.filter(e => {
+    const d = diasRestantes(e);
+    return d !== null && d >= 0 && d <= 7;
+  }).length;
+
+  const resumo = document.getElementById('resumo');
+  if (!abertos.length) {
+    resumo.textContent = 'Nada aberto no momento.';
+  } else if (semana) {
+    resumo.innerHTML =
+      `<strong>${semana}</strong> ${semana === 1 ? 'edital fecha' : 'editais fecham'}` +
+      ` nos próximos sete dias, de <strong>${abertos.length}</strong> em aberto.`;
+  } else {
+    resumo.innerHTML =
+      `<strong>${abertos.length}</strong> em aberto, nenhum fechando nesta semana.`;
+  }
+}
+
+function desenharAvisos() {
+  const caixa = document.getElementById('avisos');
+  caixa.innerHTML = '';
+  const hoje = new Date();
+  for (const estado of Object.values(fontes)) {
+    if (!estado.ultimo_resultado) continue;
+    const dias = Math.round(
+      (hoje - new Date(estado.ultimo_resultado + 'T00:00:00')) / 86400000);
+    if (dias >= 7) {
+      const p = document.createElement('p');
+      p.className = 'aviso-fonte';
+      p.textContent = `${estado.nome} não retorna resultados há ${dias} dias. ` +
+        `O coletor pode ter quebrado — vale conferir o site.`;
+      caixa.appendChild(p);
+    }
+  }
+}
+
+function desenhar() {
+  desenharAbas();
+  desenharResumo();
+  const lista = document.getElementById('lista');
+  lista.innerHTML = '';
+  const itens = visiveis();
+  if (!itens.length) {
+    const p = document.createElement('p');
+    p.className = 'vazio';
+    p.textContent = termo
+      ? 'Nenhum edital corresponde a essa busca.'
+      : { abertos: 'Nada aberto no momento. A próxima coleta roda amanhã de manhã.',
+          salvos: 'Você ainda não salvou nenhum edital.',
+          arquivados: 'Nada arquivado por enquanto.',
+          todos: 'O acervo está vazio.' }[filtro];
+    lista.appendChild(p);
+    return;
+  }
+  itens.forEach(e => lista.appendChild(cartao(e)));
+}
+
+document.getElementById('busca').addEventListener('input', ev => {
+  termo = ev.target.value.trim();
+  desenhar();
+});
+
+fetch('editais.json?' + Date.now())
+  .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+  .then(dados => {
+    acervo = dados.editais || [];
+    fontes = dados.fontes || {};
+    if (dados.gerado_em) {
+      const d = new Date(dados.gerado_em);
+      document.getElementById('rodada').textContent =
+        'Última coleta em ' + d.toLocaleString('pt-BR',
+          { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
+    }
+    desenharAvisos();
+    desenhar();
+  })
+  .catch(() => {
+    document.getElementById('resumo').textContent =
+      'Não consegui carregar o acervo. Verifique se editais.json está publicado.';
+    desenharAbas();
+  });
+</script>
+</body>
+</html>

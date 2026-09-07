@@ -1,0 +1,67 @@
+# Perfis de interesse.
+# Hoje existe um só. A estrutura já é multi-perfil: para acrescentar
+# outra pessoa, copie o bloco e mude o nome.
+#
+# A pontuação NÃO descarta nada. Ela só decide a ordem da lista e o que
+# entra no alerta do Telegram. Tudo continua visível no portal.
+
+perfis:
+  daniel:
+    nome: Daniel
+    # Aparece no alerta do Telegram quem tiver pontuação >= este valor.
+    limiar_alerta: 8
+
+    # Termos que somam pontos quando aparecem no título ou na descrição.
+    # Comece generoso: é mais fácil tirar peso depois do que descobrir
+    # o que faltou.
+    termos:
+      # Vagas e bolsas — prioridade máxima, prazos curtos
+      - {termo: "analista de inovação", peso: 12}
+      - {termo: "bolsista", peso: 8}
+      - {termo: "bolsa", peso: 6}
+      - {termo: "estágio", peso: 7}
+      - {termo: "estagiário", peso: 7}
+      - {termo: "professor formador", peso: 6}
+      - {termo: "cadastro de reserva", peso: 5}
+      - {termo: "seleção", peso: 3}
+      - {termo: "processo seletivo", peso: 4}
+
+      # Áreas de atuação
+      - {termo: "inovação", peso: 6}
+      - {termo: "startup", peso: 6}
+      - {termo: "empreendedorismo", peso: 5}
+      - {termo: "inteligência artificial", peso: 7}
+      - {termo: "tecnologia", peso: 3}
+      - {termo: "biotecnologia", peso: 7}
+      - {termo: "alimentos", peso: 7}
+      - {termo: "agroindústria", peso: 6}
+      - {termo: "rastreabilidade", peso: 6}
+      - {termo: "agronegócio", peso: 5}
+      - {termo: "computação", peso: 4}
+      - {termo: "engenharia", peso: 3}
+
+      # Fomento
+      - {termo: "pesquisa", peso: 4}
+      - {termo: "extensão", peso: 3}
+      - {termo: "publicação", peso: 3}
+      - {termo: "evento científico", peso: 4}
+      - {termo: "produtividade", peso: 4}
+
+    # Termos que REBAIXAM. Pontuação negativa, nunca exclusão.
+    # "prorrogação da validade do resultado" é o ruído recorrente da STED:
+    # é ato administrativo sobre seleção antiga, não oportunidade nova.
+    rebaixar:
+      - {termo: "prorrogação da validade do resultado", peso: -20}
+      - {termo: "resultado final", peso: -12}
+      - {termo: "resultado parcial", peso: -12}
+      - {termo: "resultado preliminar", peso: -12}
+      - {termo: "convocação", peso: -8}
+      - {termo: "homologação", peso: -8}
+      - {termo: "cronograma", peso: -4}
+
+    # Bônus por prazo apertado: o que fecha logo sobe na lista.
+    urgencia:
+      dias_criticos: 5      # prazo em 5 dias ou menos
+      bonus_critico: 10
+      dias_proximos: 15
+      bonus_proximo: 4

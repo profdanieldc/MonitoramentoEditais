@@ -1,0 +1,30 @@
+# Fontes monitoradas.
+# Para adicionar uma fonte nova que use o mesmo tipo de coletor,
+# basta acrescentar um bloco aqui. Não precisa mexer no código.
+
+fontes:
+  - id: sted-ufma
+    nome: STED/UFMA
+    tipo: plone            # coletor genérico de coleções Plone
+    ativa: true
+    url: https://portalpadrao.ufma.br/dted/colecoes/todos-os-editais
+    # A coleção vem ordenada por data de modificação (mais recente primeiro),
+    # então a primeira página basta para o monitoramento diário.
+    # Aumente para 2 se quiser margem em dias de muita publicação.
+    paginas: 1
+    # Abre a página de cada item novo para tentar extrair o prazo.
+    abrir_itens: true
+
+  # Exemplos já preparados para a próxima etapa — desativados por enquanto.
+  # A STED e o PROPESQ usam o mesmo Plone, então o coletor é o mesmo.
+  - id: propesq-ufma
+    nome: PROPESQ/UFMA
+    tipo: plone
+    ativa: false
+    url: https://portalpadrao.ufma.br/propesq/editais
+    paginas: 1
+    abrir_itens: true
+
+# Quantos dias sem nenhum resultado antes de avisar que a fonte
+# pode ter quebrado (mudança de layout, site fora do ar).
+alerta_silencio_dias: 7
