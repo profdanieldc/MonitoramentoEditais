@@ -1,14 +1,7 @@
 name: Diagnóstico de rede
 
-# Terceira rodada, desta vez decisiva.
-#
-# O coletor falha com timeout enquanto testes isolados passam. As duas
-# explicações possíveis são: (a) algo no cliente Python, ou (b) o IP de
-# saída do runner sendo descartado pela UFMA.
-#
-# Este workflow alterna curl e Python DENTRO DO MESMO JOB, no mesmo IP,
-# várias vezes seguidas. Se um passa e o outro falha lado a lado, é o
-# cliente. Se os dois falham e passam juntos, é o IP ou o servidor.
+# Mapeia a estrutura da página de editais da SECTI para que o parser seja
+# escrito em cima do HTML real, e não de suposição. Descartável depois.
 
 on:
   workflow_dispatch:
@@ -17,54 +10,82 @@ jobs:
   diagnosticar:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4        # igual ao workflow de coleta
-
+      - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-
       - run: pip install -r requirements.txt
 
-      - name: IP de saída deste runner
-        run: curl -s --max-time 15 https://ipinfo.io/ip || echo "(falhou)"
-
-      - name: Alternar curl e Python, seis vezes
+      - name: Estrutura da página de editais da SECTI
         run: |
           python - <<'PY'
-          import subprocess, sys, time
-          sys.path.insert(0, ".")
-          from coletores.base import buscar, CABECALHO
+          import re
           import requests
+          from bs4 import BeautifulSoup
+          from collections import Counter
 
-          URL = "https://portalpadrao.ufma.br/dted/colecoes/todos-os-editais"
+          CAB = {"User-Agent": "monitor-editais/0.1 (projeto pessoal de "
+                               "acompanhamento de editais; contato via GitHub)"}
+          URL = "https://secti.ma.gov.br/programas-ou-campanhas/editais-2026"
 
-          def tentar_curl():
-              inicio = time.time()
-              r = subprocess.run(
-                  ["curl", "-sS", "-o", "/dev/null", "--max-time", "20",
-                   "-w", "%{http_code}", URL],
-                  capture_output=True, text=True)
-              return f"http={r.stdout.strip() or '---'} ({time.time()-inicio:.1f}s)"
+          r = requests.get(URL, headers=CAB, timeout=30)
+          r.encoding = r.apparent_encoding or "utf-8"
+          print(f"http={r.status_code}  bytes={len(r.content)}\n")
+          sopa = BeautifulSoup(r.text, "html.parser")
 
-          def tentar_requests():
-              inicio = time.time()
-              try:
-                  r = requests.get(URL, headers=CABECALHO, timeout=20)
-                  return f"http={r.status_code} ({time.time()-inicio:.1f}s)"
-              except Exception as e:
-                  return f"{type(e).__name__} ({time.time()-inicio:.1f}s)"
+          for t in sopa(["script", "style"]):
+              t.decompose()
 
-          def tentar_coletor():
-              """Exatamente a função que o coletor usa, com 1 tentativa."""
-              inicio = time.time()
-              sopa = buscar(URL, tentativas=1)
-              achou = "ok" if sopa and sopa.find("table") else "vazio/None"
-              return f"{achou} ({time.time()-inicio:.1f}s)"
+          print("== contagem de tags estruturais")
+          for tag in ["table", "tr", "ul", "ol", "li", "article",
+                      "section", "h1", "h2", "h3", "h4", "p", "a"]:
+              n = len(sopa.find_all(tag))
+              if n:
+                  print(f"   {tag:9} {n}")
 
-          for volta in range(1, 7):
-              print(f"volta {volta}")
-              print(f"   curl              {tentar_curl()}")
-              print(f"   requests direto   {tentar_requests()}")
-              print(f"   buscar() do repo  {tentar_coletor()}")
-              time.sleep(12)
+          print("\n== classes mais frequentes")
+          classes = Counter()
+          for el in sopa.find_all(class_=True):
+              for c in el.get("class", []):
+                  classes[c] += 1
+          for nome, n in classes.most_common(25):
+              print(f"   {n:4}  .{nome}")
+
+          links = sopa.find_all("a", href=True)
+          pdfs = [a for a in links if ".pdf" in a["href"].lower()]
+          print(f"\n== links: {len(links)} no total, {len(pdfs)} apontando para PDF")
+          print("\n== primeiros 20 links para PDF (texto -> href)")
+          for a in pdfs[:20]:
+              texto = a.get_text(" ", strip=True)[:95] or "(sem texto)"
+              print(f"   {texto}")
+              print(f"      {a['href'][:130]}")
+
+          print("\n== ancestrais do primeiro link de PDF (para achar o contêiner)")
+          if pdfs:
+              atual = pdfs[0]
+              for nivel in range(6):
+                  atual = atual.parent
+                  if atual is None:
+                      break
+                  cls = ".".join(atual.get("class", [])) or "(sem classe)"
+                  ident = atual.get("id") or "(sem id)"
+                  print(f"   nivel {nivel+1}: <{atual.name}> classe={cls} id={ident}")
+
+          print("\n== títulos da página")
+          for h in sopa.find_all(["h1", "h2", "h3", "h4"])[:25]:
+              print(f"   <{h.name}> {h.get_text(' ', strip=True)[:110]}")
+
+          texto = re.sub(r"\s+", " ", sopa.get_text(" ", strip=True))
+          print(f"\n== amostra do texto ({len(texto)} caracteres no total)")
+          print("  " + texto[:1400])
+
+          print("\n\n== o sitemap serve?")
+          try:
+              s = requests.get("https://secti.ma.gov.br/xml/sitemap",
+                               headers=CAB, timeout=30)
+              print(f"   http={s.status_code} tipo={s.headers.get('content-type')} "
+                    f"bytes={len(s.content)}")
+              print("   " + s.text[:600].replace("\n", "\n   "))
+          except Exception as e:
+              print(f"   falhou: {type(e).__name__}")
           PY
