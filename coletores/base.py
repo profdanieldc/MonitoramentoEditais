@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import re
 import time
-from datetime import date
+from datetime import date, datetime
 
 import requests
 from bs4 import BeautifulSoup
@@ -16,6 +16,17 @@ CABECALHO = {
     )
 }
 
+# O portal da UFMA cai por alguns minutos de cada vez. Insistir por uma
+# janela larga cobre essas quedas curtas sem incomodar o servidor: são
+# cinco tentativas espalhadas por cerca de cinco minutos, não uma rajada.
+TENTATIVAS = 5
+ESPERAS = [15, 45, 90, 150]   # segundos entre uma tentativa e a seguinte
+
+class FonteIndisponivel(Exception):
+    """A fonte não respondeu. Diferente de 'a fonte respondeu e não havia
+    nada novo' — que é resultado normal e não deve gerar alerta."""
+
+
 MESES = {
     "janeiro": 1, "fevereiro": 2, "março": 3, "marco": 3, "abril": 4,
     "maio": 5, "junho": 6, "julho": 7, "agosto": 8, "setembro": 9,
@@ -23,19 +34,41 @@ MESES = {
 }
 
 
-def buscar(url: str, tentativas: int = 3, espera: float = 3.0) -> BeautifulSoup | None:
-    """Baixa uma página e devolve a árvore HTML. None se falhar."""
-    for tentativa in range(tentativas):
+def buscar(url: str, tentativas: int = TENTATIVAS) -> BeautifulSoup | None:
+    """Baixa uma página e devolve a árvore HTML. None se falhar em todas.
+
+    Cada tentativa é registrada com horário e duração. Quando algo falhar
+    de novo, o log mostra o padrão — se todas as tentativas estouraram no
+    mesmo segundo ou se o servidor voltou no meio — em vez de uma única
+    mensagem sem contexto.
+    """
+    ultimo_erro = None
+
+    for numero in range(1, tentativas + 1):
+        marca = datetime.now().strftime("%H:%M:%S")
+        inicio = time.monotonic()
         try:
-            resposta = requests.get(url, headers=CABECALHO, timeout=30)
+            resposta = requests.get(
+                url, headers=CABECALHO, timeout=(15, 45)
+            )
             resposta.raise_for_status()
             resposta.encoding = resposta.apparent_encoding or "utf-8"
+            if numero > 1:
+                print(f"    tentativa {numero} às {marca}: ok em "
+                      f"{time.monotonic() - inicio:.1f}s")
             return BeautifulSoup(resposta.text, "html.parser")
         except requests.RequestException as erro:
-            if tentativa == tentativas - 1:
-                print(f"  [erro] {url}: {erro}")
-                return None
-            time.sleep(espera * (tentativa + 1))
+            ultimo_erro = erro
+            duracao = time.monotonic() - inicio
+            print(f"    tentativa {numero} às {marca}: "
+                  f"{type(erro).__name__} após {duracao:.1f}s")
+            if numero < tentativas:
+                pausa = ESPERAS[min(numero - 1, len(ESPERAS) - 1)]
+                print(f"    aguardando {pausa}s")
+                time.sleep(pausa)
+
+    print(f"  [erro] {url} não respondeu em {tentativas} tentativas: "
+          f"{type(ultimo_erro).__name__}")
     return None
 
 

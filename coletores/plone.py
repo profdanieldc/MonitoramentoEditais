@@ -13,7 +13,9 @@ from __future__ import annotations
 import time
 from urllib.parse import urljoin, urlparse, urlunparse
 
-from coletores.base import buscar, data_numerica, extrair_prazo, texto_da_pagina
+from coletores.base import (
+    FonteIndisponivel, buscar, data_numerica, extrair_prazo, texto_da_pagina,
+)
 from nucleo.modelo import Edital, id_de
 
 
@@ -45,7 +47,9 @@ def coletar(fonte: dict) -> list[Edital]:
         url = base_url if pagina == 0 else f"{base_url}?b_start:int={pagina * 10}"
         sopa = buscar(url)
         if sopa is None:
-            break
+            if pagina == 0:
+                raise FonteIndisponivel(url)
+            break        # páginas seguintes falhando: usa o que já veio
 
         linhas = _linhas_da_tabela(sopa)
         if not linhas:
