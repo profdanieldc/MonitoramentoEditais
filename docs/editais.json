@@ -1,11 +1,212 @@
 {
-  "gerado_em": "2026-09-08T00:37:30+00:00",
+  "gerado_em": "2026-09-08T00:52:10+00:00",
   "fontes": {
     "sted-ufma": {
       "nome": "STED/UFMA",
-      "ultima_rodada": "2026-09-08T00:37:30+00:00",
-      "itens_ultima_rodada": 0
+      "ultima_rodada": "2026-09-08T00:51:42+00:00",
+      "itens_ultima_rodada": 10,
+      "falhas_seguidas": 0,
+      "ultimo_resultado": "2026-09-08"
     }
   },
-  "editais": []
+  "editais": [
+    {
+      "id": "1ee18d6bf7ce7d9f",
+      "url": "https://portalpadrao.ufma.br/dted/editais/edital-ndeg04-2025-processo-seletivo-para-a-formacao-de-cadastro-de-reserva-de-professor-formador-interno-e-externo-para-atuar-nos-cursos-de-graduacao-ead",
+      "titulo": "Edital N°04/2025 | Processo Seletivo para a formação de cadastro de reserva de Professor Formador interno e externo para atuar nos Cursos de Graduação EAD",
+      "fonte": "sted-ufma",
+      "fonte_nome": "STED/UFMA",
+      "descricao": "EDITAL N°04/2025 - STED",
+      "publicado_em": null,
+      "modificado_em": "2026-08-10",
+      "prazo": null,
+      "prazo_confianca": "ausente",
+      "pontuacao": 15,
+      "motivos": [
+        "professor formador",
+        "cadastro de reserva",
+        "processo seletivo"
+      ],
+      "visto_em": "2026-09-08T00:51:57+00:00",
+      "atualizado_em": "2026-09-08T00:51:57+00:00",
+      "revisao": 1
+    },
+    {
+      "id": "c7bce62991c54572",
+      "url": "https://portalpadrao.ufma.br/dted/editais/edital-no-13-2026-processo-seletivo-para-coordenador-dos-cursos-de-especializacao-em-ensino-de-matematica-no-nivel-medio-tecnologias-digitais-no-contexto-educacional-analise-de-dados-e-inteligencia-artificial-gestao-estrategica-de-pessoas-na-era-digital-e",
+      "titulo": "Edital Nº13/2026 | Processo seletivo para coordenador dos cursos de especialização em ensino de matemática no nível médio, tecnologias digitais na educação, análise de dados e inteligência artificial, gestão de pessoas na era digital e gestão socioambiental de territórios e maretórios na EAD",
+      "fonte": "sted-ufma",
+      "fonte_nome": "STED/UFMA",
+      "descricao": "Edital nº 13/2026 - STED",
+      "publicado_em": null,
+      "modificado_em": "2026-07-14",
+      "prazo": null,
+      "prazo_confianca": "ausente",
+      "pontuacao": 14,
+      "motivos": [
+        "processo seletivo",
+        "inteligência artificial",
+        "tecnologia"
+      ],
+      "visto_em": "2026-09-08T00:52:04+00:00",
+      "atualizado_em": "2026-09-08T00:52:04+00:00",
+      "revisao": 1
+    },
+    {
+      "id": "dc4bbc5a3b19170a",
+      "url": "https://portalpadrao.ufma.br/dted/editais/edital-no10-2026-processo-seletivo-para-mediador-pedagogico-residente-dos-cursos-de-graduacao-ead",
+      "titulo": "Edital Nº10/2026 | Processo Seletivo para Mediador Pedagógico Residente dos cursos de Graduação EaD",
+      "fonte": "sted-ufma",
+      "fonte_nome": "STED/UFMA",
+      "descricao": "EDITAL Nº10/2026 - STED",
+      "publicado_em": null,
+      "modificado_em": "2026-07-31",
+      "prazo": null,
+      "prazo_confianca": "ausente",
+      "pontuacao": 4,
+      "motivos": [
+        "processo seletivo"
+      ],
+      "visto_em": "2026-09-08T00:51:59+00:00",
+      "atualizado_em": "2026-09-08T00:51:59+00:00",
+      "revisao": 1
+    },
+    {
+      "id": "ab703b79345a8c42",
+      "url": "https://portalpadrao.ufma.br/dted/editais/edital-ndeg-22-2025-processo-seletivo-para-mediador-pedagogico-dos-cursos-de-graduacao-ead-uab-capes-ufma",
+      "titulo": "Edital N° 22/2025 - Processo Seletivo para Mediador Pedagógico dos Cursos de Graduação Ead - UAB/CAPES/UFMA",
+      "fonte": "sted-ufma",
+      "fonte_nome": "STED/UFMA",
+      "descricao": "",
+      "publicado_em": null,
+      "modificado_em": "2026-07-20",
+      "prazo": null,
+      "prazo_confianca": "ausente",
+      "pontuacao": 4,
+      "motivos": [
+        "processo seletivo"
+      ],
+      "visto_em": "2026-09-08T00:52:02+00:00",
+      "atualizado_em": "2026-09-08T00:52:02+00:00",
+      "revisao": 1
+    },
+    {
+      "id": "ab0a42c3343a9d7b",
+      "url": "https://portalpadrao.ufma.br/dted/editais/edital-no12-2025-processo-seletivo-para-assistente-pedagogico-pedagogo-dos-cursos-de-graduacao-ead",
+      "titulo": "Edital Nº12/2025 | Processo Seletivo para Assistente Pedagógico-Pedagogo dos Cursos de Graduação EAD",
+      "fonte": "sted-ufma",
+      "fonte_nome": "STED/UFMA",
+      "descricao": "EDITAL Nº12/2025 - STED",
+      "publicado_em": null,
+      "modificado_em": "2026-07-14",
+      "prazo": null,
+      "prazo_confianca": "ausente",
+      "pontuacao": 4,
+      "motivos": [
+        "processo seletivo"
+      ],
+      "visto_em": "2026-09-08T00:52:06+00:00",
+      "atualizado_em": "2026-09-08T00:52:06+00:00",
+      "revisao": 1
+    },
+    {
+      "id": "86deb6e95379b52f",
+      "url": "https://portalpadrao.ufma.br/dted/editais/edital-no11-2026-processo-seletivo-para-assistente-pedagogico-dos-cursos-na-modalidade-educacao-a-distancia",
+      "titulo": "Edital Nº11/2026 | Processo Seletivo para Assistente Pedagógico dos Cursos na modalidade educação a distância",
+      "fonte": "sted-ufma",
+      "fonte_nome": "STED/UFMA",
+      "descricao": "EDITAL Nº11/2026 - STED",
+      "publicado_em": null,
+      "modificado_em": "2026-07-14",
+      "prazo": null,
+      "prazo_confianca": "ausente",
+      "pontuacao": 4,
+      "motivos": [
+        "processo seletivo"
+      ],
+      "visto_em": "2026-09-08T00:52:08+00:00",
+      "atualizado_em": "2026-09-08T00:52:08+00:00",
+      "revisao": 1
+    },
+    {
+      "id": "ca96928cd61fbcf4",
+      "url": "https://portalpadrao.ufma.br/dted/editais/edital-no-16-2026-prorrogacao-da-validade-do-resultado-do-processo-seletivo-regido-pelo-edital-no-30-2023-especializacao-em-analise-de-dados-e-inteligencia-artificial",
+      "titulo": "Edital Nº 16/2026 | Prorrogação da validade do resultado do processo seletivo regido pelo Edital nº 30/2023: Especialização em Análise de Dados e Inteligência Artificial",
+      "fonte": "sted-ufma",
+      "fonte_nome": "STED/UFMA",
+      "descricao": "",
+      "publicado_em": null,
+      "modificado_em": "2026-08-28",
+      "prazo": null,
+      "prazo_confianca": "ausente",
+      "pontuacao": -9,
+      "motivos": [
+        "processo seletivo",
+        "inteligência artificial",
+        "−prorrogação da validade do resultado"
+      ],
+      "visto_em": "2026-09-08T00:51:47+00:00",
+      "atualizado_em": "2026-09-08T00:51:47+00:00",
+      "revisao": 1
+    },
+    {
+      "id": "a8333dc8619f0f49",
+      "url": "https://portalpadrao.ufma.br/dted/editais/edital-no17-2026-prorrogacao-da-validade-do-resultado-do-processo-seletivo-regido-pelo-edital-no-36-2023-especializacao-em-gestao-estrategica-de-pessoas-na-era-digital",
+      "titulo": "Edital Nº17/2026 | Prorrogação da validade do resultado do processo seletivo regido pelo Edital nº 36/2023: Especialização em Gestão Estratégica de Pessoas na Era Digital.",
+      "fonte": "sted-ufma",
+      "fonte_nome": "STED/UFMA",
+      "descricao": "",
+      "publicado_em": null,
+      "modificado_em": "2026-08-28",
+      "prazo": null,
+      "prazo_confianca": "ausente",
+      "pontuacao": -16,
+      "motivos": [
+        "processo seletivo",
+        "−prorrogação da validade do resultado"
+      ],
+      "visto_em": "2026-09-08T00:51:45+00:00",
+      "atualizado_em": "2026-09-08T00:51:45+00:00",
+      "revisao": 1
+    },
+    {
+      "id": "5c996166ae965510",
+      "url": "https://portalpadrao.ufma.br/dted/editais/edital-no15-2026-prorrogacao-da-validade-do-resultado-do-processo-seletivo-regido-pelo-edital-no-29-2023-especializacao-em-ensino-de-matematica-no-nivel-medio",
+      "titulo": "Edital Nº15/2026 | Prorrogação da validade do resultado do processo seletivo regido pelo Edital nº 29/2023: Especialização em Ensino de Matemática no Nível Médio",
+      "fonte": "sted-ufma",
+      "fonte_nome": "STED/UFMA",
+      "descricao": "",
+      "publicado_em": null,
+      "modificado_em": "2026-08-28",
+      "prazo": null,
+      "prazo_confianca": "ausente",
+      "pontuacao": -16,
+      "motivos": [
+        "processo seletivo",
+        "−prorrogação da validade do resultado"
+      ],
+      "visto_em": "2026-09-08T00:51:51+00:00",
+      "atualizado_em": "2026-09-08T00:51:51+00:00",
+      "revisao": 1
+    },
+    {
+      "id": "0a2fcaf1cf0622eb",
+      "url": "https://portalpadrao.ufma.br/dted/editais/edital-no14-2026-prorrogacao-da-validade-do-resultado-do-edital-no-41-2023-especializacao-em-tecn-digitais-em-ambientes-educacionais",
+      "titulo": "Edital Nº14/2026 | Prorrogação da validade do resultado do Edital nº 41/2023: Especialização em Tecn. Digitais em Ambientes Educacionais",
+      "fonte": "sted-ufma",
+      "fonte_nome": "STED/UFMA",
+      "descricao": "",
+      "publicado_em": null,
+      "modificado_em": "2026-08-28",
+      "prazo": null,
+      "prazo_confianca": "ausente",
+      "pontuacao": -20,
+      "motivos": [
+        "−prorrogação da validade do resultado"
+      ],
+      "visto_em": "2026-09-08T00:51:53+00:00",
+      "atualizado_em": "2026-09-08T00:51:53+00:00",
+      "revisao": 1
+    }
+  ]
 }
