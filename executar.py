@@ -19,6 +19,7 @@ import yaml
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from coletores import plone  # noqa: E402
+from coletores.base import FonteIndisponivel  # noqa: E402
 from nucleo import telegram  # noqa: E402
 from nucleo.modelo import (  # noqa: E402
     Edital, agora_iso, carregar, editais_de, hoje, salvar,
@@ -51,6 +52,7 @@ def main() -> int:
 
     novos: list[Edital] = []
     alterados: list[Edital] = []
+    falhas: list[tuple[str, int]] = []
 
     for fonte in cfg_fontes["fontes"]:
         if not fonte.get("ativa"):
@@ -63,21 +65,30 @@ def main() -> int:
             print(f"[{fonte['id']}] tipo de coletor desconhecido: {fonte['tipo']}")
             continue
 
-        print(f"[{fonte['id']}] coletando…")
-        try:
-            encontrados = modulo.coletar(fonte)
-        except Exception as erro:  # um coletor quebrado não derruba os outros
-            print(f"[{fonte['id']}] falhou: {erro}")
-            encontrados = []
-
-        print(f"[{fonte['id']}] {len(encontrados)} item(ns) na listagem")
-
         estado = estado_fontes.setdefault(fonte["id"], {})
         estado["nome"] = fonte["nome"]
         estado["ultima_rodada"] = agora_iso()
+
+        print(f"[{fonte['id']}] coletando…")
+        try:
+            encontrados = modulo.coletar(fonte)
+        except FonteIndisponivel:
+            estado["falhas_seguidas"] = estado.get("falhas_seguidas", 0) + 1
+            falhas.append((fonte["nome"], estado["falhas_seguidas"]))
+            print(f"[{fonte['id']}] indisponível "
+                  f"({estado['falhas_seguidas']} rodada(s) seguida(s))")
+            continue
+        except Exception as erro:  # um coletor quebrado não derruba os outros
+            estado["falhas_seguidas"] = estado.get("falhas_seguidas", 0) + 1
+            falhas.append((fonte["nome"], estado["falhas_seguidas"]))
+            print(f"[{fonte['id']}] falhou: {type(erro).__name__}: {erro}")
+            continue
+
+        estado["falhas_seguidas"] = 0
         estado["itens_ultima_rodada"] = len(encontrados)
         if encontrados:
             estado["ultimo_resultado"] = hoje().isoformat()
+        print(f"[{fonte['id']}] {len(encontrados)} item(ns) na listagem")
 
         for achado in encontrados:
             anterior = conhecidos.get(achado.id)
@@ -120,9 +131,10 @@ def main() -> int:
             silenciosas.append(estado.get("nome", id_fonte))
 
     lista = ordenar(list(conhecidos.values()))
-    salvar(lista, estado_fontes)
+    mudou = salvar(lista, estado_fontes)
     print(f"\n{len(novos)} novo(s), {len(alterados)} atualizado(s), "
-          f"{len(lista)} no acervo")
+          f"{len(lista)} no acervo"
+          + ("" if mudou else " — nada mudou, arquivo não reescrito"))
 
     limiar = perfil.get("limiar_alerta", 0)
     alerta_novos = [e for e in novos if e.pontuacao >= limiar and not e.encerrado()]
@@ -133,7 +145,8 @@ def main() -> int:
         print("(--sem-alerta: mensagem não enviada)")
         return 0
 
-    mensagem = telegram.montar_mensagem(alerta_novos, alerta_alterados, silenciosas)
+    mensagem = telegram.montar_mensagem(
+        alerta_novos, alerta_alterados, silenciosas, falhas)
     if mensagem is None:
         print("Nada acima do limiar hoje; nenhuma mensagem enviada.")
         return 0
