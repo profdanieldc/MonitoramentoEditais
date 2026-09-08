@@ -18,7 +18,7 @@ import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from coletores import plone  # noqa: E402
+from coletores import plone, secti  # noqa: E402
 from coletores.base import FonteIndisponivel  # noqa: E402
 from nucleo import telegram  # noqa: E402
 from nucleo.modelo import (  # noqa: E402
@@ -27,7 +27,7 @@ from nucleo.modelo import (  # noqa: E402
 from nucleo.pontuacao import ordenar, pontuar  # noqa: E402
 
 RAIZ = Path(__file__).resolve().parent
-COLETORES = {"plone": plone}
+COLETORES = {"plone": plone, "secti": secti}
 
 
 def ler_config(nome: str) -> dict:
@@ -67,6 +67,9 @@ def main() -> int:
 
         estado = estado_fontes.setdefault(fonte["id"], {})
         estado["nome"] = fonte["nome"]
+        estado["sigla"] = fonte.get("sigla", fonte["nome"][:5])
+        estado["cor"] = fonte.get("cor", "#5E6B63")
+        estado["logo"] = fonte.get("logo")
         estado["ultima_rodada"] = agora_iso()
 
         print(f"[{fonte['id']}] coletando…")

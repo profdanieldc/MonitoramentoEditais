@@ -5,6 +5,8 @@
 fontes:
   - id: sted-ufma
     nome: STED/UFMA
+    sigla: UFMA            # etiqueta mostrada no portal
+    cor: "#1F5C3D"
     tipo: plone            # coletor genérico de coleções Plone
     ativa: true
     url: https://portalpadrao.ufma.br/dted/colecoes/todos-os-editais
@@ -15,10 +17,25 @@ fontes:
     # Abre a página de cada item novo para tentar extrair o prazo.
     abrir_itens: true
 
+  - id: secti-ma
+    nome: SECTI-MA
+    sigla: SECTI
+    cor: "#8A4B10"
+    tipo: secti
+    ativa: true
+    # O ano é acrescentado pelo coletor (editais-2026, editais-2027…).
+    # Nos três primeiros meses do ano ele também lê a página do ano
+    # anterior, porque edital de dezembro tem inscrição em janeiro.
+    base_url: https://secti.ma.gov.br/programas-ou-campanhas
+    # O prazo mora dentro do PDF do edital, não na página.
+    abrir_itens: true
+
   # Exemplos já preparados para a próxima etapa — desativados por enquanto.
   # A STED e o PROPESQ usam o mesmo Plone, então o coletor é o mesmo.
   - id: propesq-ufma
     nome: PROPESQ/UFMA
+    sigla: UFMA
+    cor: "#1F5C3D"
     tipo: plone
     ativa: false
     url: https://portalpadrao.ufma.br/propesq/editais

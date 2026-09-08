@@ -145,6 +145,17 @@
 
   .meta { margin: 0; font-size: 13px; color: var(--tinta-fraca); }
   .meta .fonte { color: var(--tinta-media); font-weight: 500; }
+
+  /* Etiqueta do órgão. Sigla em texto por padrão: carrega instantâneo,
+     nunca quebra e mantém a lista visualmente uniforme. Se houver um
+     arquivo de logo configurado, ele entra no lugar. */
+  .marca {
+    display: inline-block; padding: 1px 7px; border-radius: 3px;
+    border: 1px solid var(--marca-cor, var(--linha));
+    color: var(--marca-cor, var(--tinta-media));
+    font-size: 12px; font-weight: 500;
+  }
+  .marca-img { height: 17px; width: auto; vertical-align: -4px; }
   .meta .sep { display: inline-block; width: 1px; height: 10px;
                background: var(--linha); margin: 0 8px; vertical-align: -1px; }
 
@@ -310,7 +321,15 @@ function cartao(edital) {
   artigo.className = 'edital';
   artigo.dataset.urgencia = nivel;
 
-  const meta = [`<span class="fonte">${escapar(edital.fonte_nome)}</span>`];
+  const info = fontes[edital.fonte] || {};
+  const marca = info.logo
+    ? `<img class="marca-img" src="${escapar(info.logo)}"
+         alt="${escapar(edital.fonte_nome)}" title="${escapar(edital.fonte_nome)}">`
+    : `<span class="marca" style="--marca-cor:${escapar(info.cor || '')}"
+         title="${escapar(edital.fonte_nome)}">${escapar(
+           info.sigla || edital.fonte_nome)}</span>`;
+
+  const meta = [marca];
   const quando = dataCurta(edital.modificado_em) || dataCurta(edital.visto_em);
   if (quando) meta.push(`atualizado em ${quando}`);
   if (edital.revisao > 1) meta.push(`revisão ${edital.revisao}`);

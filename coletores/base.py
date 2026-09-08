@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 
+import io
 import re
 import time
 from datetime import date, datetime
+from urllib.parse import unquote, urlparse, urlunparse
 
 import requests
 from bs4 import BeautifulSoup
@@ -72,6 +74,53 @@ def buscar(url: str, tentativas: int = TENTATIVAS) -> BeautifulSoup | None:
     return None
 
 
+def normalizar_url(url: str) -> str:
+    """Deixa a URL em forma canônica para servir de chave.
+
+    O site da SECTI mistura `secti.ma.gov.br` com `www.secti.ma.gov.br` e
+    ora codifica acentos (`N%C2%BA`), ora não. Sem normalizar, o mesmo
+    edital vira dois registros e é anunciado como novo toda rodada.
+    """
+    partes = urlparse(url.strip())
+    host = partes.netloc.lower().removeprefix("www.")
+    caminho = unquote(partes.path)
+    return urlunparse((partes.scheme or "https", host, caminho, "", "", ""))
+
+
+def baixar_pdf(url: str, paginas: int = 6, tentativas: int = 3) -> str:
+    """Baixa um PDF e devolve o texto das primeiras páginas.
+
+    Só as primeiras, porque o cronograma de inscrição fica sempre no começo
+    e editais têm dezenas de páginas de anexos. Devolve string vazia se o
+    arquivo não abrir ou for digitalizado (imagem sem texto).
+    """
+    try:
+        from pypdf import PdfReader
+    except ImportError:
+        print("    [aviso] pypdf não instalado; prazo não será extraído do PDF")
+        return ""
+
+    for numero in range(1, tentativas + 1):
+        try:
+            resposta = requests.get(url, headers=CABECALHO, timeout=(15, 60))
+            resposta.raise_for_status()
+            leitor = PdfReader(io.BytesIO(resposta.content))
+            trechos = []
+            for pagina in leitor.pages[:paginas]:
+                try:
+                    trechos.append(pagina.extract_text() or "")
+                except Exception:
+                    continue
+            return "\n".join(trechos)
+        except requests.RequestException:
+            if numero < tentativas:
+                time.sleep(10 * numero)
+        except Exception as erro:
+            print(f"    [aviso] não consegui ler o PDF ({type(erro).__name__})")
+            return ""
+    return ""
+
+
 def data_numerica(texto: str) -> date | None:
     """Converte '28/08/2026' (ou 28/08/26) em date."""
     m = re.search(r"\b(\d{1,2})/(\d{1,2})/(\d{2,4})\b", texto)
@@ -109,7 +158,27 @@ PISTAS_PRAZO = [
     r"per[íi]odo\s+de\s+submiss[ãa]o[^.\n]{0,60}?a\s",
     r"submiss[ãa]o[^.\n]{0,40}?at[ée]",
     r"encerramento\s+das\s+inscri[çc][õo]es",
+    # Cronogramas da SECTI vêm em tabela; ao virar texto, o rótulo fica
+    # colado na data. Ex.: "Data limite para inscrições 23 de março de 2026"
+    r"data\s+limite\s+(?:para\s+)?(?:as\s+)?inscri[çc][õo]es",
+    r"t[ée]rmino\s+das\s+inscri[çc][õo]es",
+    r"fim\s+das\s+inscri[çc][õo]es",
+    r"prazo\s+de\s+inscri[çc][ãa]o",
+    r"per[íi]odo\s+de\s+inscri[çc][õo]es",
+    # Último recurso: só a palavra "inscrições". Fica no fim da lista de
+    # propósito, para que as pistas específicas sejam tentadas antes.
+    # Pega construções soltas como "as inscrições ocorrem no período de
+    # 24 de abril a 8 de maio de 2026".
+    r"inscri[çc][õo]es",
 ]
+
+# Intervalo: "13/07/2026 a 13/09/2026" ou "20 de março a 23 de abril de 2026".
+# Nesses casos o que interessa é a segunda data, o fechamento.
+INTERVALO = re.compile(
+    r"(\d{1,2}/\d{1,2}/\d{2,4}|\d{1,2}\s+de\s+[a-zç]+(?:\s+de\s+\d{4})?)"
+    r"\s*(?:a|at[ée]|à)\s+"
+    r"(\d{1,2}/\d{1,2}/\d{2,4}|\d{1,2}\s+de\s+[a-zç]+\s+de\s+\d{4})",
+    re.IGNORECASE)
 
 
 def extrair_prazo(texto: str) -> date | None:
@@ -123,6 +192,15 @@ def extrair_prazo(texto: str) -> date | None:
     for pista in PISTAS_PRAZO:
         for m in re.finditer(pista, limpo, flags=re.IGNORECASE):
             trecho = limpo[m.end(): m.end() + 120]
+
+            # Se o trecho traz um intervalo, o prazo é o fim dele.
+            intervalo = INTERVALO.search(trecho)
+            if intervalo:
+                fim = intervalo.group(2)
+                achada = data_numerica(fim) or data_por_extenso(fim)
+                if achada:
+                    return achada
+
             achada = data_numerica(trecho) or data_por_extenso(trecho)
             if achada:
                 return achada
