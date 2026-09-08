@@ -32,6 +32,9 @@ jobs:
       - name: Instalar dependências
         run: pip install -r requirements.txt
 
+      - name: IP de saída deste runner
+        run: curl -s --max-time 15 https://ipinfo.io/ip || echo "(indisponível)"
+
       - name: Rodar coleta
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
