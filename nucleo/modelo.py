@@ -75,22 +75,69 @@ class Edital:
         return d is not None and d < 0
 
 
+VAZIO = {"gerado_em": None, "fontes": {}, "editais": []}
+
+
 def carregar() -> dict:
+    """Lê o acervo. Arquivo ausente, vazio ou corrompido devolve acervo
+    vazio em vez de derrubar a rodada: recomeçar do zero é recuperável,
+    perder a coleta do dia não é."""
     if not ARQUIVO_DADOS.exists():
-        return {"gerado_em": None, "fontes": {}, "editais": []}
-    with ARQUIVO_DADOS.open(encoding="utf-8") as f:
-        return json.load(f)
+        return dict(VAZIO)
+    try:
+        conteudo = ARQUIVO_DADOS.read_text(encoding="utf-8").strip()
+    except OSError as erro:
+        print(f"[aviso] não consegui ler o acervo ({erro}); recomeçando vazio")
+        return dict(VAZIO)
+    if not conteudo:
+        print("[aviso] acervo vazio; recomeçando do zero")
+        return dict(VAZIO)
+    try:
+        dados = json.loads(conteudo)
+    except json.JSONDecodeError as erro:
+        print(f"[aviso] acervo ilegível (linha {erro.lineno}); recomeçando do zero")
+        return dict(VAZIO)
+    if not isinstance(dados, dict):
+        print("[aviso] acervo em formato inesperado; recomeçando do zero")
+        return dict(VAZIO)
+    return dados
 
 
-def salvar(editais: list[Edital], estado_fontes: dict) -> None:
+def salvar(editais: list[Edital], estado_fontes: dict) -> bool:
+    """Grava o acervo. Devolve True se o arquivo mudou de verdade.
+
+    Carimbos de data mudam a cada rodada e, sozinhos, gerariam um commit
+    a cada 12 horas para sempre. Só vale gravar quando o conteúdo mudou.
+    """
     ARQUIVO_DADOS.parent.mkdir(parents=True, exist_ok=True)
     payload = {
         "gerado_em": agora_iso(),
         "fontes": estado_fontes,
         "editais": [asdict(e) for e in editais],
     }
+
+    def sem_carimbos(d: dict) -> str:
+        copia = {
+            "editais": d.get("editais", []),
+            "fontes": {
+                id_fonte: {k: v for k, v in estado.items()
+                           if k not in ("ultima_rodada", "ultimo_resultado")}
+                for id_fonte, estado in d.get("fontes", {}).items()
+            },
+        }
+        return json.dumps(copia, ensure_ascii=False, sort_keys=True)
+
+    if ARQUIVO_DADOS.exists():
+        try:
+            with ARQUIVO_DADOS.open(encoding="utf-8") as f:
+                if sem_carimbos(json.load(f)) == sem_carimbos(payload):
+                    return False
+        except (json.JSONDecodeError, OSError):
+            pass
+
     with ARQUIVO_DADOS.open("w", encoding="utf-8") as f:
         json.dump(payload, f, ensure_ascii=False, indent=2)
+    return True
 
 
 def editais_de(dados: dict) -> dict[str, Edital]:

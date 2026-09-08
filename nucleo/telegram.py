@@ -38,7 +38,8 @@ def _linha(edital: Edital) -> str:
 
 
 def montar_mensagem(novos: list[Edital], alterados: list[Edital],
-                    silenciosas: list[str]) -> str | None:
+                    silenciosas: list[str],
+                    falhas: list[tuple[str, int]] | None = None) -> str | None:
     blocos: list[str] = []
 
     if novos:
@@ -48,6 +49,16 @@ def montar_mensagem(novos: list[Edital], alterados: list[Edital],
             "<b>Retificados ou atualizados</b>\n"
             + "\n".join(_linha(e) for e in alterados)
         )
+    # Falha de rede é diferente de "não teve edital novo". Avisar no mesmo
+    # dia, e não depois de uma semana de silêncio, porque há editais que
+    # abrem e fecham em três dias.
+    for nome, seguidas in (falhas or []):
+        if seguidas >= 2:
+            blocos.append(
+                f"<b>Coleta falhando</b>\n• {_escapar(nome)} não responde há "
+                f"{seguidas} rodadas seguidas."
+            )
+
     if silenciosas:
         blocos.append(
             "<b>Atenção</b>\n"
