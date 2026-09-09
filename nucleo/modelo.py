@@ -58,8 +58,19 @@ class Edital:
 
     def assinatura(self) -> str:
         """O que define 'mudou'. Se qualquer um destes campos difere,
-        houve retificação e o edital volta a aparecer, mesmo arquivado."""
-        base = f"{self.titulo}|{self.descricao}|{self.modificado_em}|{self.prazo}"
+        houve retificação e o edital volta a aparecer, mesmo arquivado.
+
+        Só entram campos que vêm da LISTAGEM. O prazo fica de fora de
+        propósito: ele não vem da listagem, é extraído depois abrindo o
+        PDF. Se entrasse aqui, o item recém-coletado (ainda sem prazo)
+        nunca bateria com o guardado (já com prazo), e todo edital seria
+        declarado retificado a cada rodada, para sempre.
+
+        Isso não deixa escapar mudança de prazo: para o prazo mudar é
+        preciso um documento novo ou editado, e isso altera a descrição
+        (na SECTI, pelos anexos) ou a data de modificação (no Plone).
+        """
+        base = f"{self.titulo}|{self.descricao}|{self.modificado_em}"
         return hashlib.sha1(base.encode("utf-8")).hexdigest()[:16]
 
     def dias_restantes(self) -> int | None:
