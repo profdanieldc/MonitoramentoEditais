@@ -1,9 +1,9 @@
 {
-  "gerado_em": "2026-09-09T02:41:35+00:00",
+  "gerado_em": "2026-09-09T02:48:05+00:00",
   "fontes": {
     "sted-ufma": {
       "nome": "STED/UFMA",
-      "ultima_rodada": "2026-09-09T02:40:51+00:00",
+      "ultima_rodada": "2026-09-09T02:47:22+00:00",
       "itens_ultima_rodada": 10,
       "falhas_seguidas": 0,
       "ultimo_resultado": "2026-09-09",
@@ -16,7 +16,7 @@
       "sigla": "SECTI",
       "cor": "#8A4B10",
       "logo": null,
-      "ultima_rodada": "2026-09-09T02:40:53+00:00",
+      "ultima_rodada": "2026-09-09T02:47:25+00:00",
       "falhas_seguidas": 0,
       "itens_ultima_rodada": 10,
       "ultimo_resultado": "2026-09-09"
@@ -82,8 +82,8 @@
         "tecnologia"
       ],
       "visto_em": "2026-09-09T02:41:31+00:00",
-      "atualizado_em": "2026-09-09T02:41:31+00:00",
-      "revisao": 1
+      "atualizado_em": "2026-09-09T02:48:01+00:00",
+      "revisao": 2
     },
     {
       "id": "dc4bbc5a3b19170a",
@@ -259,8 +259,8 @@
         "inovação"
       ],
       "visto_em": "2026-09-09T02:40:57+00:00",
-      "atualizado_em": "2026-09-09T02:40:57+00:00",
-      "revisao": 1
+      "atualizado_em": "2026-09-09T02:47:29+00:00",
+      "revisao": 2
     },
     {
       "id": "cdbfecfc7e07e1f2",
@@ -280,8 +280,8 @@
         "inovação"
       ],
       "visto_em": "2026-09-09T02:41:05+00:00",
-      "atualizado_em": "2026-09-09T02:41:05+00:00",
-      "revisao": 1
+      "atualizado_em": "2026-09-09T02:47:36+00:00",
+      "revisao": 2
     },
     {
       "id": "e2fe43490a645f44",
@@ -301,8 +301,8 @@
         "inovação"
       ],
       "visto_em": "2026-09-09T02:41:09+00:00",
-      "atualizado_em": "2026-09-09T02:41:09+00:00",
-      "revisao": 1
+      "atualizado_em": "2026-09-09T02:47:39+00:00",
+      "revisao": 2
     },
     {
       "id": "ec3941c1b4555830",
@@ -322,8 +322,8 @@
         "inovação"
       ],
       "visto_em": "2026-09-09T02:41:16+00:00",
-      "atualizado_em": "2026-09-09T02:41:16+00:00",
-      "revisao": 1
+      "atualizado_em": "2026-09-09T02:47:46+00:00",
+      "revisao": 2
     },
     {
       "id": "d3a804ae9137d0ee",
@@ -339,8 +339,8 @@
       "pontuacao": 0,
       "motivos": [],
       "visto_em": "2026-09-09T02:41:02+00:00",
-      "atualizado_em": "2026-09-09T02:41:02+00:00",
-      "revisao": 1
+      "atualizado_em": "2026-09-09T02:47:33+00:00",
+      "revisao": 2
     },
     {
       "id": "96eabe8664ef94a6",
@@ -356,8 +356,8 @@
       "pontuacao": 0,
       "motivos": [],
       "visto_em": "2026-09-09T02:41:21+00:00",
-      "atualizado_em": "2026-09-09T02:41:21+00:00",
-      "revisao": 1
+      "atualizado_em": "2026-09-09T02:47:50+00:00",
+      "revisao": 2
     },
     {
       "id": "c312dd2c6798a5da",
@@ -373,8 +373,8 @@
       "pontuacao": 0,
       "motivos": [],
       "visto_em": "2026-09-09T02:41:25+00:00",
-      "atualizado_em": "2026-09-09T02:41:25+00:00",
-      "revisao": 1
+      "atualizado_em": "2026-09-09T02:47:55+00:00",
+      "revisao": 2
     },
     {
       "id": "39ded64f4d888cc6",
@@ -390,8 +390,8 @@
       "pontuacao": 0,
       "motivos": [],
       "visto_em": "2026-09-09T02:41:29+00:00",
-      "atualizado_em": "2026-09-09T02:41:29+00:00",
-      "revisao": 1
+      "atualizado_em": "2026-09-09T02:47:58+00:00",
+      "revisao": 2
     },
     {
       "id": "a98945c819e53764",
@@ -411,8 +411,8 @@
         "−resultado final"
       ],
       "visto_em": "2026-09-09T02:41:13+00:00",
-      "atualizado_em": "2026-09-09T02:41:13+00:00",
-      "revisao": 1
+      "atualizado_em": "2026-09-09T02:47:43+00:00",
+      "revisao": 2
     }
   ]
 }
