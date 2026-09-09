@@ -1,12 +1,12 @@
 {
-  "gerado_em": "2026-09-08T23:22:28+00:00",
+  "gerado_em": "2026-09-09T02:41:35+00:00",
   "fontes": {
     "sted-ufma": {
       "nome": "STED/UFMA",
-      "ultima_rodada": "2026-09-08T23:10:18+00:00",
+      "ultima_rodada": "2026-09-09T02:40:51+00:00",
       "itens_ultima_rodada": 10,
-      "falhas_seguidas": 3,
-      "ultimo_resultado": "2026-09-08",
+      "falhas_seguidas": 0,
+      "ultimo_resultado": "2026-09-09",
       "sigla": "UFMA",
       "cor": "#1F5C3D",
       "logo": null
@@ -16,8 +16,10 @@
       "sigla": "SECTI",
       "cor": "#8A4B10",
       "logo": null,
-      "ultima_rodada": "2026-09-08T23:16:34+00:00",
-      "falhas_seguidas": 3
+      "ultima_rodada": "2026-09-09T02:40:53+00:00",
+      "falhas_seguidas": 0,
+      "itens_ultima_rodada": 10,
+      "ultimo_resultado": "2026-09-09"
     }
   },
   "editais": [
@@ -61,6 +63,26 @@
       ],
       "visto_em": "2026-09-08T00:52:04+00:00",
       "atualizado_em": "2026-09-08T00:52:04+00:00",
+      "revisao": 1
+    },
+    {
+      "id": "bd2e0f27df6e53a3",
+      "url": "https://secti.ma.gov.br/uploads/secti/docs/Edital_atividades_SNCT_2026_SECTI.docx_(2)_.pdf",
+      "titulo": "EDITAL DE INSCRIÇÕES DE ATIVIDADES SECTI Nº 10/2026 — SEMANA NACIONAL DE CIÊNCIA E TECNOLOGIA/SEMANA ESTADUAL DE CIÊNCIA, TECNOLOGIA E INOVAÇÃO (SNCT 2026)",
+      "fonte": "secti-ma",
+      "fonte_nome": "SECTI-MA",
+      "descricao": "",
+      "publicado_em": null,
+      "modificado_em": null,
+      "prazo": "2026-09-28",
+      "prazo_confianca": "extraido",
+      "pontuacao": 9,
+      "motivos": [
+        "inovação",
+        "tecnologia"
+      ],
+      "visto_em": "2026-09-09T02:41:31+00:00",
+      "atualizado_em": "2026-09-09T02:41:31+00:00",
       "revisao": 1
     },
     {
@@ -217,6 +239,179 @@
       ],
       "visto_em": "2026-09-08T00:51:53+00:00",
       "atualizado_em": "2026-09-08T00:51:53+00:00",
+      "revisao": 1
+    },
+    {
+      "id": "3bfeca4d237098fc",
+      "url": "https://secti.ma.gov.br/uploads/secti/docs/EDITAL_SECTI_FAPEMA_Nº_01_2026.pdf",
+      "titulo": "EDITAL SECTI/FAPEMA Nº 01/2026 — SELEÇÃO DE BOLSISTAS PARA PROGRAMAS DE INOVAÇÃO",
+      "fonte": "secti-ma",
+      "fonte_nome": "SECTI-MA",
+      "descricao": "LISTA PARCIAL DE APROVADOS | LISTA FINAL DE APROVADOS",
+      "publicado_em": null,
+      "modificado_em": null,
+      "prazo": "2026-01-27",
+      "prazo_confianca": "extraido",
+      "pontuacao": 17,
+      "motivos": [
+        "bolsista",
+        "seleção",
+        "inovação"
+      ],
+      "visto_em": "2026-09-09T02:40:57+00:00",
+      "atualizado_em": "2026-09-09T02:40:57+00:00",
+      "revisao": 1
+    },
+    {
+      "id": "cdbfecfc7e07e1f2",
+      "url": "https://secti.ma.gov.br/uploads/secti/docs/Edital_SECTI_FAPEMA_n_03_2026.pdf",
+      "titulo": "EDITAL SECTI/FAPEMA Nº 03/2026 — SELEÇÃO DE BOLSISTAS PARA PROGRAMAS DE INOVAÇÃO",
+      "fonte": "secti-ma",
+      "fonte_nome": "SECTI-MA",
+      "descricao": "LISTA PARCIAL DE APROVADOS | LISTA FINAL DE APROVADOS",
+      "publicado_em": null,
+      "modificado_em": null,
+      "prazo": "2026-03-23",
+      "prazo_confianca": "extraido",
+      "pontuacao": 17,
+      "motivos": [
+        "bolsista",
+        "seleção",
+        "inovação"
+      ],
+      "visto_em": "2026-09-09T02:41:05+00:00",
+      "atualizado_em": "2026-09-09T02:41:05+00:00",
+      "revisao": 1
+    },
+    {
+      "id": "e2fe43490a645f44",
+      "url": "https://secti.ma.gov.br/uploads/secti/docs/EDITAL_SECTI_FAPEMA_Nº_04_2026_.pdf",
+      "titulo": "EDITAL SECTI/FAPEMA Nº 04/2026 — SELEÇÃO DE BOLSISTAS PARA PROGRAMAS DE INOVAÇÃO",
+      "fonte": "secti-ma",
+      "fonte_nome": "SECTI-MA",
+      "descricao": "LISTA PARCIAL DE APROVADOS | LISTA FINAL DE APROVADOS",
+      "publicado_em": null,
+      "modificado_em": null,
+      "prazo": "2026-05-04",
+      "prazo_confianca": "extraido",
+      "pontuacao": 17,
+      "motivos": [
+        "bolsista",
+        "seleção",
+        "inovação"
+      ],
+      "visto_em": "2026-09-09T02:41:09+00:00",
+      "atualizado_em": "2026-09-09T02:41:09+00:00",
+      "revisao": 1
+    },
+    {
+      "id": "ec3941c1b4555830",
+      "url": "https://secti.ma.gov.br/uploads/secti/docs/EDITAL_SECTI_FAPEMA_Nº_05_2026_.docx_.pdf",
+      "titulo": "EDITAL SECTI/FAPEMA Nº 05/2026 — SELEÇÃO DE BOLSISTAS PARA PROGRAMAS DE INOVAÇÃO",
+      "fonte": "secti-ma",
+      "fonte_nome": "SECTI-MA",
+      "descricao": "1° RETIFICAÇÃO EDITAL SECTI/FAPEMA N ° 05/2026 | LISTA PARCIAL DE APROVADOS | LISTA FINAL DE APROVADOS",
+      "publicado_em": null,
+      "modificado_em": null,
+      "prazo": "2026-06-01",
+      "prazo_confianca": "extraido",
+      "pontuacao": 17,
+      "motivos": [
+        "bolsista",
+        "seleção",
+        "inovação"
+      ],
+      "visto_em": "2026-09-09T02:41:16+00:00",
+      "atualizado_em": "2026-09-09T02:41:16+00:00",
+      "revisao": 1
+    },
+    {
+      "id": "d3a804ae9137d0ee",
+      "url": "https://secti.ma.gov.br/uploads/secti/docs/SEI_013190001_Edital_1.pdf",
+      "titulo": "EDITAL DE DIVULGAÇÃO DE VAGAS E INSCRIÇÃO PARA CURSO DE LÍNGUA CHINESA A SER OFERTADO PELO INSTITUTO CONFÚCIO NA UNESP – MA EDITAL SECTI Nº 02/2026 — EDITAL DE DIVULGAÇÃO DE VAGAS E INSCRIÇÃO PARA CURSO DE LÍNGUA CHINESA",
+      "fonte": "secti-ma",
+      "fonte_nome": "SECTI-MA",
+      "descricao": "",
+      "publicado_em": null,
+      "modificado_em": null,
+      "prazo": "2026-03-07",
+      "prazo_confianca": "extraido",
+      "pontuacao": 0,
+      "motivos": [],
+      "visto_em": "2026-09-09T02:41:02+00:00",
+      "atualizado_em": "2026-09-09T02:41:02+00:00",
+      "revisao": 1
+    },
+    {
+      "id": "96eabe8664ef94a6",
+      "url": "https://secti.ma.gov.br/uploads/secti/docs/EDITAL_SECTI_FAPEMA_Nº_06_2026_–_TRILHAS_03_-_1200_vagas..pdf",
+      "titulo": "EDITAL SECTI/FAPEMA Nº06/2026 – TRILHAS 3 — PROGRAMA TRILHAS INOVA 3",
+      "fonte": "secti-ma",
+      "fonte_nome": "SECTI-MA",
+      "descricao": "ERRATA SECTI/FAPEMA Nº06/2026 - TRILHAS 3 | LISTA PARCIAL DE APROVADOS E CLASSIFICADOS | LISTA FINAL DE APROVADOS E CLASSIFICADOS | ERRATA DA LISTA FINAL DE CANDIDATOS APROVADOS EM AUTOMAÇÃO EM IA E DESIGN E EXPERIÊNCIA | CHAMADA DE EXCEDENTES",
+      "publicado_em": null,
+      "modificado_em": null,
+      "prazo": "2026-07-20",
+      "prazo_confianca": "extraido",
+      "pontuacao": 0,
+      "motivos": [],
+      "visto_em": "2026-09-09T02:41:21+00:00",
+      "atualizado_em": "2026-09-09T02:41:21+00:00",
+      "revisao": 1
+    },
+    {
+      "id": "c312dd2c6798a5da",
+      "url": "https://secti.ma.gov.br/uploads/secti/docs/CHAMADA_ESPECIAL_PARA_VAGAS_OCIOSAS___TRILHAS_03___86_vagas_(1).docx_(2)_.pdf",
+      "titulo": "EDITAL SECTI/FAPEMA Nº08/2026 – CHAMADA ESPECIAL TRILHAS 3 — CHAMADA ESPECIAL PARA PREENCHIMENTO DE VAGAS OCIOSAS NO PROGRAMA TRILHAS INOVA 3",
+      "fonte": "secti-ma",
+      "fonte_nome": "SECTI-MA",
+      "descricao": "LISTA PARCIAL DE APROVADOS E CLASSIFICADOS | LISTA FINAL DE APROVADOS E CLASSIFICADOS",
+      "publicado_em": null,
+      "modificado_em": null,
+      "prazo": "2026-08-20",
+      "prazo_confianca": "extraido",
+      "pontuacao": 0,
+      "motivos": [],
+      "visto_em": "2026-09-09T02:41:25+00:00",
+      "atualizado_em": "2026-09-09T02:41:25+00:00",
+      "revisao": 1
+    },
+    {
+      "id": "39ded64f4d888cc6",
+      "url": "https://secti.ma.gov.br/uploads/secti/docs/SEI_017064969_Edital_9.pdf",
+      "titulo": "EDITAL SECTI/FAPEMA Nº09/2026 — EDITAL CURSO DE LÍNGUA CHINESA - INSTITUTO CONFÚCIO",
+      "fonte": "secti-ma",
+      "fonte_nome": "SECTI-MA",
+      "descricao": "",
+      "publicado_em": null,
+      "modificado_em": null,
+      "prazo": "2026-09-05",
+      "prazo_confianca": "extraido",
+      "pontuacao": 0,
+      "motivos": [],
+      "visto_em": "2026-09-09T02:41:29+00:00",
+      "atualizado_em": "2026-09-09T02:41:29+00:00",
+      "revisao": 1
+    },
+    {
+      "id": "a98945c819e53764",
+      "url": "https://secti.ma.gov.br/uploads/secti/docs/SEI_014639073_Edital_3.pdf",
+      "titulo": "PROCESSO SELETIVO DE ESTUDANTES DO ENSINO MÉDIO DA REDE PÚBLICA ESTADUAL DE ENSINO DO MARANHÃO PARA O PROGRAMA ESTADUAL “MARANHÃO SEM FRONTEIRAS” — SELEÇÃO DE ESTUDANTES PARA O PROGRAMA “MARANHÃO SEM FRONTEIRAS”",
+      "fonte": "secti-ma",
+      "fonte_nome": "SECTI-MA",
+      "descricao": "CANDIDATOS CLASSIFICADOS NA FASE AVALIACAO CURRICULAR | RESULTADO FINAL MARANHÃO SEM FRONTEIRAS",
+      "publicado_em": null,
+      "modificado_em": null,
+      "prazo": "2026-05-29",
+      "prazo_confianca": "extraido",
+      "pontuacao": -5,
+      "motivos": [
+        "seleção",
+        "processo seletivo",
+        "−resultado final"
+      ],
+      "visto_em": "2026-09-09T02:41:13+00:00",
+      "atualizado_em": "2026-09-09T02:41:13+00:00",
       "revisao": 1
     }
   ]
