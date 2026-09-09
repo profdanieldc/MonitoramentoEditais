@@ -53,6 +53,7 @@ def main() -> int:
     novos: list[Edital] = []
     alterados: list[Edital] = []
     falhas: list[tuple[str, int]] = []
+    tentadas = 0
 
     for fonte in cfg_fontes["fontes"]:
         if not fonte.get("ativa"):
@@ -60,6 +61,7 @@ def main() -> int:
         if args.fonte and fonte["id"] != args.fonte:
             continue
 
+        tentadas += 1
         modulo = COLETORES.get(fonte["tipo"])
         if modulo is None:
             print(f"[{fonte['id']}] tipo de coletor desconhecido: {fonte['tipo']}")
@@ -144,8 +146,16 @@ def main() -> int:
     alerta_alterados = [e for e in alterados
                         if e.pontuacao >= limiar and not e.encerrado()]
 
+    # Se TODAS as fontes falharam, provavelmente o problema é a origem
+    # (IP do runner descartado), não os sites. Sair com erro faz o workflow
+    # disparar o job de repetição, que roda em outra máquina, com outro IP.
+    todas_falharam = tentadas > 0 and len(falhas) == tentadas
+    if todas_falharam:
+        print("\nTodas as fontes falharam nesta máquina. "
+              "Saindo com erro para que a repetição rode em outro runner.")
+        return 2
+
     if args.sem_alerta:
-        print("(--sem-alerta: mensagem não enviada)")
         return 0
 
     mensagem = telegram.montar_mensagem(

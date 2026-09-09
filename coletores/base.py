@@ -18,11 +18,13 @@ CABECALHO = {
     )
 }
 
-# O portal da UFMA cai por alguns minutos de cada vez. Insistir por uma
-# janela larga cobre essas quedas curtas sem incomodar o servidor: são
-# cinco tentativas espalhadas por cerca de cinco minutos, não uma rajada.
-TENTATIVAS = 5
-ESPERAS = [15, 45, 90, 150]   # segundos entre uma tentativa e a seguinte
+# Poucas tentativas de propósito. Quando a causa é o IP de saída estar
+# bloqueado na origem, insistir na mesma máquina não muda nada — o pacote
+# vai continuar sendo descartado. Três tentativas cobrem instabilidade real
+# do servidor; para o resto, quem resolve é o job de repetição no workflow,
+# que sorteia um runner novo e portanto um IP novo.
+TENTATIVAS = 3
+ESPERAS = [15, 45]            # segundos entre uma tentativa e a seguinte
 
 class FonteIndisponivel(Exception):
     """A fonte não respondeu. Diferente de 'a fonte respondeu e não havia
