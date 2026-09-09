@@ -5,11 +5,9 @@ on:
     # Horários em UTC. Maranhão é UTC−3, então:
     #   10:00 UTC = 07:00 em São Luís
     #   21:00 UTC = 18:00 em São Luís
-    # Duas rodadas por dia: editais como os da SECTI abrem e fecham
-    # em poucos dias, e uma janela de 24h é arriscada.
     - cron: "0 10 * * *"
     - cron: "0 21 * * *"
-  workflow_dispatch:        # permite rodar na mão pelo botão "Run workflow"
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -18,19 +16,25 @@ concurrency:
   group: coleta
   cancel-in-progress: false
 
+# Os três jobs abaixo são idênticos. A repetição existe porque parte das
+# faixas de IP dos runners do GitHub não alcança os servidores da UFMA e da
+# SECTI — os pacotes são descartados em silêncio, sem 403, sem recusa. Não
+# há como escolher o IP, mas cada job novo sorteia uma máquina nova. Então
+# a saída é desistir rápido e tentar de outra origem.
+#
+# A repetição só dispara quando TODAS as fontes falham (executar.py sai com
+# código 2). Se pelo menos uma coletou, a rodada é dada como boa.
+
 jobs:
   coletar:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
           cache: pip
-
-      - name: Instalar dependências
-        run: pip install -r requirements.txt
+      - run: pip install -r requirements.txt
 
       - name: IP de saída deste runner
         run: curl -s --max-time 15 https://ipinfo.io/ip || echo "(indisponível)"
@@ -42,6 +46,7 @@ jobs:
         run: python executar.py
 
       - name: Guardar o acervo
+        if: always()          # grava o que deu certo mesmo se algo falhou
         run: |
           git config user.name "monitor-editais"
           git config user.email "actions@github.com"
@@ -50,5 +55,76 @@ jobs:
             echo "Nada mudou nesta rodada."
           else
             git commit -m "Coleta de $(date -u '+%d/%m/%Y %H:%M') UTC"
+            git pull --rebase --autostash
+            git push
+          fi
+
+  repetir:
+    needs: coletar
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+
+      - name: IP de saída deste runner
+        run: curl -s --max-time 15 https://ipinfo.io/ip || echo "(indisponível)"
+
+      - name: Rodar coleta
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python executar.py
+
+      - name: Guardar o acervo
+        if: always()
+        run: |
+          git config user.name "monitor-editais"
+          git config user.email "actions@github.com"
+          git add docs/editais.json
+          if git diff --staged --quiet; then
+            echo "Nada mudou nesta rodada."
+          else
+            git commit -m "Coleta de $(date -u '+%d/%m/%Y %H:%M') UTC (2ª tentativa)"
+            git pull --rebase --autostash
+            git push
+          fi
+
+  repetir-de-novo:
+    needs: repetir
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+
+      - name: IP de saída deste runner
+        run: curl -s --max-time 15 https://ipinfo.io/ip || echo "(indisponível)"
+
+      - name: Rodar coleta
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python executar.py
+
+      - name: Guardar o acervo
+        if: always()
+        run: |
+          git config user.name "monitor-editais"
+          git config user.email "actions@github.com"
+          git add docs/editais.json
+          if git diff --staged --quiet; then
+            echo "Nada mudou nesta rodada."
+          else
+            git commit -m "Coleta de $(date -u '+%d/%m/%Y %H:%M') UTC (3ª tentativa)"
+            git pull --rebase --autostash
             git push
           fi
