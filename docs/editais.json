@@ -1,12 +1,12 @@
 {
-  "gerado_em": "2026-09-10T22:58:35+00:00",
+  "gerado_em": "2026-09-11T14:03:09+00:00",
   "fontes": {
     "sted-ufma": {
       "nome": "STED/UFMA",
-      "ultima_rodada": "2026-09-10T22:55:18+00:00",
+      "ultima_rodada": "2026-09-11T14:02:57+00:00",
       "itens_ultima_rodada": 10,
-      "falhas_seguidas": 1,
-      "ultimo_resultado": "2026-09-09",
+      "falhas_seguidas": 0,
+      "ultimo_resultado": "2026-09-11",
       "sigla": "UFMA",
       "cor": "#1F5C3D",
       "logo": null
@@ -16,10 +16,10 @@
       "sigla": "SECTI",
       "cor": "#8A4B10",
       "logo": null,
-      "ultima_rodada": "2026-09-10T22:57:04+00:00",
-      "falhas_seguidas": 1,
+      "ultima_rodada": "2026-09-11T14:03:03+00:00",
+      "falhas_seguidas": 0,
       "itens_ultima_rodada": 10,
-      "ultimo_resultado": "2026-09-09"
+      "ultimo_resultado": "2026-09-11"
     }
   },
   "editais": [
@@ -169,7 +169,7 @@
       "fonte_nome": "STED/UFMA",
       "descricao": "Edital N°19/2025 | UAB/CAPES/UFMA",
       "publicado_em": null,
-      "modificado_em": "2026-09-09",
+      "modificado_em": "2026-09-10",
       "prazo": null,
       "prazo_confianca": "ausente",
       "pontuacao": 4,
@@ -177,8 +177,8 @@
         "processo seletivo"
       ],
       "visto_em": "2026-09-09T22:53:49+00:00",
-      "atualizado_em": "2026-09-09T22:53:49+00:00",
-      "revisao": 1
+      "atualizado_em": "2026-09-11T14:03:00+00:00",
+      "revisao": 2
     },
     {
       "id": "ca96928cd61fbcf4",
