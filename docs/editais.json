@@ -1,12 +1,12 @@
 {
-  "gerado_em": "2026-09-22T23:28:00+00:00",
+  "gerado_em": "2026-09-23T14:40:46+00:00",
   "fontes": {
     "sted-ufma": {
       "nome": "STED/UFMA",
-      "ultima_rodada": "2026-09-22T23:27:51+00:00",
+      "ultima_rodada": "2026-09-23T14:40:37+00:00",
       "itens_ultima_rodada": 10,
       "falhas_seguidas": 0,
-      "ultimo_resultado": "2026-09-22",
+      "ultimo_resultado": "2026-09-23",
       "sigla": "UFMA",
       "cor": "#1F5C3D",
       "logo": null
@@ -16,13 +16,34 @@
       "sigla": "SECTI",
       "cor": "#8A4B10",
       "logo": null,
-      "ultima_rodada": "2026-09-22T23:27:55+00:00",
+      "ultima_rodada": "2026-09-23T14:40:42+00:00",
       "falhas_seguidas": 0,
       "itens_ultima_rodada": 10,
-      "ultimo_resultado": "2026-09-22"
+      "ultimo_resultado": "2026-09-23"
     }
   },
   "editais": [
+    {
+      "id": "bd2e0f27df6e53a3",
+      "url": "https://secti.ma.gov.br/uploads/secti/docs/Edital_atividades_SNCT_2026_SECTI.docx_(2)_.pdf",
+      "titulo": "EDITAL DE INSCRIÇÕES DE ATIVIDADES SECTI Nº 10/2026 — SEMANA NACIONAL DE CIÊNCIA E TECNOLOGIA/SEMANA ESTADUAL DE CIÊNCIA, TECNOLOGIA E INOVAÇÃO (SNCT 2026)",
+      "fonte": "secti-ma",
+      "fonte_nome": "SECTI-MA",
+      "descricao": "",
+      "publicado_em": null,
+      "modificado_em": null,
+      "prazo": "2026-09-28",
+      "prazo_confianca": "extraido",
+      "pontuacao": 19,
+      "motivos": [
+        "inovação",
+        "tecnologia",
+        "fecha em 5 dia(s)"
+      ],
+      "visto_em": "2026-09-09T02:41:31+00:00",
+      "atualizado_em": "2026-09-09T02:48:01+00:00",
+      "revisao": 2
+    },
     {
       "id": "1ee18d6bf7ce7d9f",
       "url": "https://portalpadrao.ufma.br/dted/editais/edital-ndeg04-2025-processo-seletivo-para-a-formacao-de-cadastro-de-reserva-de-professor-formador-interno-e-externo-para-atuar-nos-cursos-de-graduacao-ead",
@@ -64,26 +85,6 @@
       "visto_em": "2026-09-08T00:52:04+00:00",
       "atualizado_em": "2026-09-08T00:52:04+00:00",
       "revisao": 1
-    },
-    {
-      "id": "bd2e0f27df6e53a3",
-      "url": "https://secti.ma.gov.br/uploads/secti/docs/Edital_atividades_SNCT_2026_SECTI.docx_(2)_.pdf",
-      "titulo": "EDITAL DE INSCRIÇÕES DE ATIVIDADES SECTI Nº 10/2026 — SEMANA NACIONAL DE CIÊNCIA E TECNOLOGIA/SEMANA ESTADUAL DE CIÊNCIA, TECNOLOGIA E INOVAÇÃO (SNCT 2026)",
-      "fonte": "secti-ma",
-      "fonte_nome": "SECTI-MA",
-      "descricao": "",
-      "publicado_em": null,
-      "modificado_em": null,
-      "prazo": "2026-09-28",
-      "prazo_confianca": "extraido",
-      "pontuacao": 13,
-      "motivos": [
-        "inovação",
-        "tecnologia"
-      ],
-      "visto_em": "2026-09-09T02:41:31+00:00",
-      "atualizado_em": "2026-09-09T02:48:01+00:00",
-      "revisao": 2
     },
     {
       "id": "dc4bbc5a3b19170a",
