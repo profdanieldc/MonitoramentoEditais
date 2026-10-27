@@ -1,12 +1,12 @@
 {
-  "gerado_em": "2026-10-20T00:05:32+00:00",
+  "gerado_em": "2026-10-27T00:13:34+00:00",
   "fontes": {
     "sted-ufma": {
       "nome": "STED/UFMA",
-      "ultima_rodada": "2026-10-20T00:05:25+00:00",
+      "ultima_rodada": "2026-10-27T00:13:19+00:00",
       "itens_ultima_rodada": 10,
       "falhas_seguidas": 0,
-      "ultimo_resultado": "2026-10-20",
+      "ultimo_resultado": "2026-10-27",
       "sigla": "UFMA",
       "cor": "#1F5C3D",
       "logo": null
@@ -16,10 +16,10 @@
       "sigla": "SECTI",
       "cor": "#8A4B10",
       "logo": null,
-      "ultima_rodada": "2026-10-20T00:05:27+00:00",
+      "ultima_rodada": "2026-10-27T00:13:29+00:00",
       "falhas_seguidas": 0,
       "itens_ultima_rodada": 10,
-      "ultimo_resultado": "2026-10-20"
+      "ultimo_resultado": "2026-10-27"
     }
   },
   "editais": [
@@ -159,6 +159,63 @@
       "visto_em": "2026-09-09T22:53:49+00:00",
       "atualizado_em": "2026-09-22T23:27:53+00:00",
       "revisao": 4
+    },
+    {
+      "id": "e76a234fcb8f5768",
+      "url": "https://portalpadrao.ufma.br/dted/editais/edital-no-18-2026-processo-seletivo-para-mediador-pedagogico-residente-e-nao-residente-dos-cursos-de-graduacao-ead",
+      "titulo": "Edital Nº 18/2026 | Processo Seletivo para Mediador Pedagógico residente e não residente dos cursos de Graduação EaD",
+      "fonte": "sted-ufma",
+      "fonte_nome": "STED/UFMA",
+      "descricao": "Edital Nº 18/2026 - STED",
+      "publicado_em": null,
+      "modificado_em": "2026-10-26",
+      "prazo": null,
+      "prazo_confianca": "ausente",
+      "pontuacao": 4,
+      "motivos": [
+        "processo seletivo"
+      ],
+      "visto_em": "2026-10-27T00:13:22+00:00",
+      "atualizado_em": "2026-10-27T00:13:22+00:00",
+      "revisao": 1
+    },
+    {
+      "id": "c3553552cacfa6f6",
+      "url": "https://portalpadrao.ufma.br/dted/editais/edital-no-21-2026-processo-seletivo-para-professor-orientador-de-tcc-do-curso-de-especializacao-em-gestao-em-saude-ead",
+      "titulo": "Edital Nº 21/2026 | Processo Seletivo para Professor Orientador de TCC do Curso de Especialização em Gestão em Saúde EaD",
+      "fonte": "sted-ufma",
+      "fonte_nome": "STED/UFMA",
+      "descricao": "Edital Nº 21/2026 - STED",
+      "publicado_em": null,
+      "modificado_em": "2026-10-26",
+      "prazo": null,
+      "prazo_confianca": "ausente",
+      "pontuacao": 4,
+      "motivos": [
+        "processo seletivo"
+      ],
+      "visto_em": "2026-10-27T00:13:24+00:00",
+      "atualizado_em": "2026-10-27T00:13:24+00:00",
+      "revisao": 1
+    },
+    {
+      "id": "d25e6618b3d0e764",
+      "url": "https://portalpadrao.ufma.br/dted/editais/edital-no-20-2026-processo-seletivo-para-mediador-pedagogico-do-curso-de-especializacao-em-gestao-estrategica-de-pessoas-na-era-digital-ead",
+      "titulo": "Edital Nº 20/2026 | Processo Seletivo para Mediador Pedagógico do Curso de Especialização em Gestão Estratégica de Pessoas na Era Digital EaD",
+      "fonte": "sted-ufma",
+      "fonte_nome": "STED/UFMA",
+      "descricao": "Edital Nº 20/2026 - STED",
+      "publicado_em": null,
+      "modificado_em": "2026-10-26",
+      "prazo": null,
+      "prazo_confianca": "ausente",
+      "pontuacao": 4,
+      "motivos": [
+        "processo seletivo"
+      ],
+      "visto_em": "2026-10-27T00:13:27+00:00",
+      "atualizado_em": "2026-10-27T00:13:27+00:00",
+      "revisao": 1
     },
     {
       "id": "ca96928cd61fbcf4",
