@@ -1,12 +1,12 @@
 {
-  "gerado_em": "2026-11-12T02:06:32+00:00",
+  "gerado_em": "2026-11-14T16:23:22+00:00",
   "fontes": {
     "sted-ufma": {
       "nome": "STED/UFMA",
-      "ultima_rodada": "2026-11-12T02:06:19+00:00",
+      "ultima_rodada": "2026-11-14T16:21:48+00:00",
       "itens_ultima_rodada": 10,
       "falhas_seguidas": 0,
-      "ultimo_resultado": "2026-11-12",
+      "ultimo_resultado": "2026-11-14",
       "sigla": "UFMA",
       "cor": "#1F5C3D",
       "logo": null
@@ -16,8 +16,8 @@
       "sigla": "SECTI",
       "cor": "#8A4B10",
       "logo": null,
-      "ultima_rodada": "2026-11-12T02:06:27+00:00",
-      "falhas_seguidas": 0,
+      "ultima_rodada": "2026-11-14T16:21:50+00:00",
+      "falhas_seguidas": 1,
       "itens_ultima_rodada": 10,
       "ultimo_resultado": "2026-11-12"
     }
