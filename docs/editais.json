@@ -1,12 +1,12 @@
 {
-  "gerado_em": "2026-11-23T21:53:23+00:00",
+  "gerado_em": "2026-11-24T20:29:28+00:00",
   "fontes": {
     "sted-ufma": {
       "nome": "STED/UFMA",
-      "ultima_rodada": "2026-11-23T21:53:07+00:00",
+      "ultima_rodada": "2026-11-24T20:29:18+00:00",
       "itens_ultima_rodada": 10,
       "falhas_seguidas": 0,
-      "ultimo_resultado": "2026-11-23",
+      "ultimo_resultado": "2026-11-24",
       "sigla": "UFMA",
       "cor": "#1F5C3D",
       "logo": null
@@ -16,10 +16,10 @@
       "sigla": "SECTI",
       "cor": "#8A4B10",
       "logo": null,
-      "ultima_rodada": "2026-11-23T21:53:18+00:00",
+      "ultima_rodada": "2026-11-24T20:29:23+00:00",
       "falhas_seguidas": 0,
       "itens_ultima_rodada": 10,
-      "ultimo_resultado": "2026-11-23"
+      "ultimo_resultado": "2026-11-24"
     }
   },
   "editais": [
@@ -185,7 +185,7 @@
       "fonte_nome": "STED/UFMA",
       "descricao": "Edital Nº 21/2026 - STED",
       "publicado_em": null,
-      "modificado_em": "2026-11-06",
+      "modificado_em": "2026-11-24",
       "prazo": null,
       "prazo_confianca": "ausente",
       "pontuacao": 4,
@@ -193,8 +193,8 @@
         "processo seletivo"
       ],
       "visto_em": "2026-10-27T00:13:24+00:00",
-      "atualizado_em": "2026-11-07T00:36:23+00:00",
-      "revisao": 3
+      "atualizado_em": "2026-11-24T20:29:21+00:00",
+      "revisao": 4
     },
     {
       "id": "d25e6618b3d0e764",
