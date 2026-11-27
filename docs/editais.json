@@ -1,12 +1,12 @@
 {
-  "gerado_em": "2026-11-24T20:29:28+00:00",
+  "gerado_em": "2026-11-27T03:27:44+00:00",
   "fontes": {
     "sted-ufma": {
       "nome": "STED/UFMA",
-      "ultima_rodada": "2026-11-24T20:29:18+00:00",
+      "ultima_rodada": "2026-11-27T03:27:33+00:00",
       "itens_ultima_rodada": 10,
       "falhas_seguidas": 0,
-      "ultimo_resultado": "2026-11-24",
+      "ultimo_resultado": "2026-11-27",
       "sigla": "UFMA",
       "cor": "#1F5C3D",
       "logo": null
@@ -16,10 +16,10 @@
       "sigla": "SECTI",
       "cor": "#8A4B10",
       "logo": null,
-      "ultima_rodada": "2026-11-24T20:29:23+00:00",
+      "ultima_rodada": "2026-11-27T03:27:39+00:00",
       "falhas_seguidas": 0,
       "itens_ultima_rodada": 10,
-      "ultimo_resultado": "2026-11-24"
+      "ultimo_resultado": "2026-11-27"
     }
   },
   "editais": [
@@ -270,6 +270,27 @@
       ],
       "visto_em": "2026-11-12T02:06:22+00:00",
       "atualizado_em": "2026-11-12T02:06:22+00:00",
+      "revisao": 1
+    },
+    {
+      "id": "a0efcfdcc27a6884",
+      "url": "https://portalpadrao.ufma.br/dted/editais/Convocacao-Excedentes-Cursos-de-Especializacao-Ensino-da-Matematica-no-Ensino-Medio-Analise-de-Dados-e-Inteligencia-Artificial-Gestao-de-pessoas-na-Era-Digital-e-Tecnologias-Digitais-em-Ambientes-Educacionais",
+      "titulo": "Convocação Excedentes | Cursos de Especialização: Ensino da Matemática no Ensino Médio; Análise de Dados e Inteligência Artificial; Gestão de Pessoas na Era Digita; e Tecnologias Digitais em Ambientes Educacionais",
+      "fonte": "sted-ufma",
+      "fonte_nome": "STED/UFMA",
+      "descricao": "FSADU",
+      "publicado_em": null,
+      "modificado_em": "2026-11-26",
+      "prazo": null,
+      "prazo_confianca": "ausente",
+      "pontuacao": 2,
+      "motivos": [
+        "inteligência artificial",
+        "tecnologia",
+        "−convocação"
+      ],
+      "visto_em": "2026-11-27T03:27:36+00:00",
+      "atualizado_em": "2026-11-27T03:27:36+00:00",
       "revisao": 1
     },
     {
